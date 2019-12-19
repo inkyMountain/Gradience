@@ -2,25 +2,35 @@
   "name": "Gradience",
   "version": "1.0.0",
   "description": "React UI Library",
-  "main": "index.js",
   "scripts": {
-    "build": "webpack --config ./build/config/webpack.config.js --mode production"
+    "start": "cross-env NODE_ENV=development webpack-dev-server --config ./build/config/webpack.config.js --mode development",
+    "dev": "cross-env NODE_ENV=development webpack-dev-server --config ./build/config/webpack.config.js --mode development",
+    "build": "cross-env NODE_ENV=release webpack --config ./build/config/webpack.config.js --mode production"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/inkyMountain/Gradience.git"
   },
   "keywords": [],
-  "author": "chenyitao",
+  "author": "chenyiz`tao",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/inkyMountain/Gradience/issues"
   },
   "homepage": "https://github.com/inkyMountain/Gradience#readme",
   "devDependencies": {
+    "@types/react": "^16.9.16",
+    "@types/react-dom": "^16.9.4",
     "awesome-typescript-loader": "^5.2.1",
+    "cross-env": "^6.0.3",
+    "html-webpack-plugin": "^3.2.0",
     "typescript": "^3.7.3",
     "webpack": "^4.41.3",
-    "webpack-cli": "^3.3.10"
+    "webpack-cli": "^3.3.10",
+    "webpack-dev-server": "^3.10.0"
+  },
+  "dependencies": {
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0"
   }
 }
