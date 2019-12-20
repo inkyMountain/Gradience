@@ -1,8 +1,12 @@
 import React from 'react';
 
-const Button = function () {
-  return <button className="button">Button</button>;
-};
+interface ButtonProps {
+  onClick: () => void
+}
+
+const Button = ({onClick}: ButtonProps) =>
+  <button className="button" onClick={() => onClick()}>Button</button>;
+
 
 export {
   Button

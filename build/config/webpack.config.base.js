@@ -26,7 +26,7 @@ module.exports = {
   },
 
   devServer: {
-    port: 7001
+    port: 7000
   },
 
   plugins: [
@@ -34,5 +34,5 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, '../../', 'template.html'),
     })
-  ]
+  ],
 };
