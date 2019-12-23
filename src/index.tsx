@@ -1,10 +1,5 @@
 import React from 'react';
 import ReactDom from 'react-dom';
-import {Button} from './Button';
+import {App} from './App';
 
-ReactDom.render(<Button
-  onClick={() => console.log('click button')}/>, document.querySelector('#root'));
-
-export {
-  Button
-};
+ReactDom.render(<App/>, document.querySelector('#root'));

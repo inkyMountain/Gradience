@@ -5,8 +5,8 @@ interface ButtonProps {
 }
 
 const Button = ({onClick}: ButtonProps) =>
-  <button className="button" onClick={() => onClick()}>Button</button>;
-
+  <button className="button"
+          onClick={() => onClick()}>Button</button>;
 
 export {
   Button
