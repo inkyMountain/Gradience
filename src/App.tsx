@@ -1,9 +1,10 @@
 import React from 'react';
-import {Test} from './Test';
+import {Icon} from './component/Icon';
 
 const App: React.FunctionComponent = () => {
+  const name = 'cyt';
   return <div id="app">
-    <Test/>
+    <Icon name={name}/>
   </div>;
 };
 
