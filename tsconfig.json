@@ -40,8 +40,6 @@
     "noUnusedLocals": true
   },
   "include": [
-    "example.tsx",
-    "lib/**/*",
     "src/**/*",
     "include/**/*",
     "examples/**/*",
@@ -57,6 +55,7 @@
     "webpack",
     "jest",
     "src/setupTests.ts",
+    "src/static/icons",
     "*.js"
   ]
 }

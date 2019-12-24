@@ -1,4 +1,6 @@
 import React from 'react';
+import '../static/icons/index.js';
+
 
 interface IconProps {
   name?: string;
@@ -6,7 +8,9 @@ interface IconProps {
 
 const Icon = (props: IconProps) => {
   return <div className='component-icon'>
-    <span className="name">Icon name: {props.name || 'name empty'}</span>
+    <svg>
+      <use xlinkHref={`#${props.name}`}/>
+    </svg>
   </div>;
 };
 
