@@ -1,10 +1,15 @@
 import React from 'react';
-import {Icon} from './component/Icon';
+import {Icon} from './component/Icon/Icon';
+
+const clickHandler: React.MouseEventHandler = event => {
+  console.log(event.currentTarget.classList);
+};
 
 const App: React.FunctionComponent = () => {
-  const name = 'wechat';
   return <div id="app">
-    <Icon name={name}/>
+    <Icon name='wechat' onClick={clickHandler}/>
+    <Icon name='alipay'/>
+    <Icon name='right'/>
   </div>;
 };
 
