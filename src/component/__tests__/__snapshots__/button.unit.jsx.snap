@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`component button 1`] = `
+<svg
+  className="component-icon "
+>
+  <use
+    xlinkHref="#wechat"
+  />
+</svg>
+`;
+
+exports[`component icon button 1`] = `
+<svg
+  className="component-icon "
+>
+  <use
+    xlinkHref="#wechat"
+  />
+</svg>
+`;

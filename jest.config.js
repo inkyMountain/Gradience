@@ -14,6 +14,8 @@ module.exports = {
   // 目标测试文件的后缀
   moduleFileExtensions: ['js', 'jsx', 'ts', 'tsx'],
   moduleDirectories: ['node_modules', 'include'],
+
+  // 为不好识别的文件映射替代的mock
   moduleNameMapper: {
     '\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$': '<rootDir>/test/__mocks__/file-mock.js',
     '\\.(css|less|sass|scss)$': '<rootDir>/test/__mocks__/object-mock.js',
