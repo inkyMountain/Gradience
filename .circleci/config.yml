@@ -49,6 +49,7 @@ jobs:
   publish:
     <<: *defaults
     context: gradience
+    environment: NPM_TOKEN
     steps:
       - attach_workspace:
           at: .
