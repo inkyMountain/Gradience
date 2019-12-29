@@ -49,11 +49,10 @@ jobs:
   publish:
     <<: *defaults
     context: gradience
-    environment: NPM_TOKEN
     steps:
       - attach_workspace:
           at: .
-      - run: npm config set //registry.npmjs.org/:_authToken $NPM_TOKEN
+      - run: npm config set //registry.npmjs.org/:_authToken NPM_TOKEN
       - run: npm publish
 
 workflows:
