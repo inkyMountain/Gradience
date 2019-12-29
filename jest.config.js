@@ -24,9 +24,4 @@ module.exports = {
     '^.+\\.(ts|tsx)$': 'ts-jest',
   },
   setupFilesAfterEnv: ['<rootDir>test/setupTests.js'],
-
-  //  coverage
-  collectCoverage: true,
-  collectCoverageFrom: ['<rootDir>/src/components/**/*.{ts,tsx}', '!**/node_modules/**'],
-  coverageDirectory: '<rootDir>/coverage'
 };

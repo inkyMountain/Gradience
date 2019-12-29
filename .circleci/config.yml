@@ -21,6 +21,17 @@ jobs:
           root: .
           paths:
             - node_modules
+
+  test:
+    <<: *defaults
+    steps:
+      - checkout
+      - attach_workspace:
+          at: .
+      - run: npm run ci
+      - store_test_results:
+          path: test-results
+
   build:
     <<: *defaults
     steps:
@@ -32,15 +43,12 @@ jobs:
           root: .
           paths:
             - dist
-  test:
+  publish:
     <<: *defaults
     steps:
-      - checkout
       - attach_workspace:
           at: .
-      - run: npm run ci
-      - store_test_results:
-          path: test-results
+      - run: npm publish
 
 workflows:
   version: 2
@@ -53,3 +61,6 @@ workflows:
       - test:
           requires:
             - prepare
+      - publish:
+          requires:
+            - build

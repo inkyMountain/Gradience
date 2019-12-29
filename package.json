@@ -1,6 +1,6 @@
 {
   "name": "gradience",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "React UI Library",
   "scripts": {
     "test": "cross-env NODE_ENV=test jest --config=jest.config.js --runInBand",
@@ -9,12 +9,16 @@
     "build": "cross-env NODE_ENV=release webpack --config ./build/config/webpack.config.release.js --mode production",
     "ci": "cross-env NODE_ENV=test jest --config=jest.config.ci.js"
   },
+  "files": [
+    "dist",
+    "README.md"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/inkyMountain/Gradience.git"
   },
   "keywords": [],
-  "author": "chenyiz`tao",
+  "author": "chenyitao",
   "license": "MIT",
   "types": "dist/src/index",
   "main": "dist/src/index.js",
@@ -30,7 +34,7 @@
   "devDependencies": {
     "@babel/preset-env": "^7.7.7",
     "@babel/preset-react": "^7.7.4",
-    "@types/jest": "^24.0.24",
+    "@types/jest": "^24.0.25",
     "@types/react": "^16.9.16",
     "@types/react-dom": "^16.9.4",
     "awesome-typescript-loader": "^5.2.1",

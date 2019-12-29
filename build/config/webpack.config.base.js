@@ -2,7 +2,7 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-  entry: path.resolve(__dirname, '../../', 'src/index.tsx'),
+  entry: path.resolve(__dirname, '../../', 'src/components/index.tsx'),
 
   resolve: {
     extensions: ['.js', '.jsx', '.ts', '.tsx']
@@ -26,7 +26,7 @@ module.exports = {
   },
 
   output: {
-    filename: 'main.[chunkhash].js',
+    filename: 'index.[chunkhash].js',
     path: path.resolve(__dirname, '../../', 'dist'),
     // umd is both compatiable for nodejs and browser
     libraryTarget: 'umd'
