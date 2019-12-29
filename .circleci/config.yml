@@ -48,6 +48,7 @@ jobs:
             - README.md
   publish:
     <<: *defaults
+    context: gradience
     steps:
       - attach_workspace:
           at: .
