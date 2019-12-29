@@ -6,7 +6,8 @@
     "test": "cross-env NODE_ENV=test jest --config=jest.config.js --runInBand",
     "start": "cross-env NODE_ENV=development webpack-dev-server --config ./build/config/webpack.config.dev.js",
     "dev": "cross-env NODE_ENV=development webpack-dev-server --config ./build/config/webpack.config.dev.js",
-    "build": "cross-env NODE_ENV=release webpack --config ./build/config/webpack.config.release.js --mode production"
+    "build": "cross-env NODE_ENV=release webpack --config ./build/config/webpack.config.release.js --mode production",
+    "ci": "cross-env NODE_ENV=test JEST_JUNIT_OUTPUT=./test-results/jest/results.xml jest --config=jest.config.ci.js"
   },
   "repository": {
     "type": "git",
