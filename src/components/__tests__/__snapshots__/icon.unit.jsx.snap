@@ -1,15 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`component icon icon UI is correct 1`] = `
-<svg
-  className="component-icon "
->
-  <use
-    xlinkHref="#wechat"
-  />
-</svg>
-`;
-
 exports[`components icon icon UI is correct 1`] = `
 <svg
   className="component-icon "
