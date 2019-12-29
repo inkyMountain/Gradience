@@ -11,17 +11,22 @@
   },
   "files": [
     "dist",
-    "README.md"
+    "README.md",
+    "LICENSE",
+    "package.json"
   ],
+  "types": "dist/src/index",
+  "main": "dist/src/index.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/inkyMountain/Gradience.git"
   },
-  "keywords": [],
+  "keywords": [
+    "React",
+    "UI Framework"
+  ],
   "author": "chenyitao",
   "license": "MIT",
-  "types": "dist/src/index",
-  "main": "dist/src/index.js",
   "bugs": {
     "url": "https://github.com/inkyMountain/Gradience/issues"
   },
