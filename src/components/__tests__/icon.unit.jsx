@@ -4,7 +4,7 @@ import React from 'react';
 import {mount} from 'enzyme';
 
 
-describe('component icon', () => {
+describe('components icon', () => {
   it('icon UI is correct', () => {
     const iconJson = renderer.create(<Icon name={'wechat'}/>).toJSON();
     expect(iconJson).toMatchSnapshot();

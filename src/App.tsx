@@ -1,5 +1,5 @@
 import React from 'react';
-import {Icon} from './component/Icon/Icon';
+import Icon from './components/Icon/Icon';
 
 const clickHandler: React.MouseEventHandler = event => console.log(event.currentTarget.classList);
 
