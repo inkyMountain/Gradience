@@ -43,6 +43,9 @@ jobs:
           root: .
           paths:
             - dist
+            - package.json
+            - LICENSE
+            - README.md
   publish:
     <<: *defaults
     steps:
