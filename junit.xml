@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuites name="jest tests" tests="2" failures="0" time="2.566">
-  <testsuite name="components icon" errors="0" failures="0" skipped="0" timestamp="2019-12-29T09:30:04" time="2.008" tests="2">
-    <testcase classname="components icon icon UI is correct" name="components icon icon UI is correct" time="0.013">
-    </testcase>
-    <testcase classname="components icon can be clicked" name="components icon can be clicked" time="0.029">
-    </testcase>
-  </testsuite>
-</testsuites>
