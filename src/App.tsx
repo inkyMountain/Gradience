@@ -1,14 +1,27 @@
 import React from 'react';
-import Icon from './components/Icon/Icon';
-
-const clickHandler: React.MouseEventHandler = event => console.log(event.currentTarget.classList);
+import './App.scss';
+import * as pages from './pages/index';
+import {HashRouter as Router, Switch, Route} from 'react-router-dom';
 
 const App: React.FunctionComponent = () => {
-  return <div id="app">
-    <Icon name='wechat' className={`wechat icon icon`} onClick={clickHandler}/>
-    <Icon name='alipay'/>
-    <Icon name='right'/>
-  </div>;
+  return <Router>
+    <div id="app">
+      <aside className="directories">
+        <ul>
+          <li className="directory">aside</li>
+          <li className="directory">aside</li>
+          <li className="directory">aside</li>
+          <li className="directory">aside</li>
+        </ul>
+      </aside>
+
+      <main className="component-container">
+        <Switch>
+        <Route path={'/'} component={pages.PageIcon}/>
+      </Switch>
+      </main>
+    </div>
+  </Router>;
 };
 
 export {App};
