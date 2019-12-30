@@ -3,7 +3,7 @@ const path = require('path');
 
 module.exports = {
   ...base,
-  entry: path.resolve(__dirname, '../../', 'src/components/index.tsx'),
+  entry: path.resolve(__dirname, '../../', 'src/lib/index.tsx'),
   mode: 'production',
 
   // release构建时不打包react

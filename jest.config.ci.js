@@ -2,7 +2,7 @@ const base = require('./jest.config');
 const config = Object.assign({}, base, {
   //  coverage
   collectCoverage: true,
-  collectCoverageFrom: ['<rootDir>/src/components/**/*.{ts,tsx}', '!<rootDir>/src/components/index.tsx', '!**/node_modules/**'],
+  collectCoverageFrom: ['<rootDir>/src/lib/**/*.{ts,tsx}', '!<rootDir>/src/lib/index.tsx', '!**/node_modules/**'],
   coverageDirectory: '<rootDir>/coverage',
   reporters: [
     'default',

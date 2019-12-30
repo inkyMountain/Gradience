@@ -1,5 +1,5 @@
 import React from 'react';
-import Icon from '../../components/Icon/Icon';
+import Icon from '../../lib/Icon/Icon';
 
 const PageIcon = () => {
   return <div className="page-icon">
