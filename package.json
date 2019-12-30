@@ -19,7 +19,7 @@
   "main": "dist/src/index.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/inkyMountain/Gradience.git"
+    "url": "git+https://github.com/inkyMountain/gradience.git"
   },
   "keywords": [
     "React",
@@ -28,7 +28,7 @@
   "author": "chenyitao",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/inkyMountain/Gradience/issues"
+    "url": "https://github.com/inkyMountain/gradience/issues"
   },
   "homepage": "https://github.com/inkyMountain/Gradience#readme",
   "dependencies": {

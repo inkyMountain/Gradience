@@ -17,8 +17,8 @@ const App: React.FunctionComponent = () => {
 
       <main className="component-container">
         <Switch>
-        <Route path={'/'} component={pages.PageIcon}/>
-      </Switch>
+          <Route path={'/'} component={pages.PageIcon}/>
+        </Switch>
       </main>
     </div>
   </Router>;

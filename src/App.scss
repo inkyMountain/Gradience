@@ -1,0 +1,52 @@
+#app {
+  display: flex;
+}
+
+.directories {
+  width: 300px;
+  border-right: lightgray 1px solid;
+
+  .directory {
+    padding: 10px 20px;
+
+    &:hover {
+      background-color: lightblue;
+    }
+  }
+}
+
+.component-container {
+  flex: 1;
+  padding: 20px;
+}
+
+
+/* reset style */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  text-decoration: none;
+  outline: none;
+  border: none;
+  background: none;
+}
+
+a:link,
+a:visited,
+a:hover,
+a:active {
+  color: inherit;
+  text-decoration: none;
+}
+
+li {
+  list-style: none;
+}
+
+html, body, #root, #app {
+  height: 100%;
+}
