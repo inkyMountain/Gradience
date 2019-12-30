@@ -5,6 +5,7 @@ module.exports = {
   ...base,
   entry: path.resolve(__dirname, '../../', 'src/components/index.tsx'),
   mode: 'production',
+
   // release构建时不打包react
   externals: {
     react: {
