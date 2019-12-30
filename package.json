@@ -1,6 +1,6 @@
 {
   "name": "gradience",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "React UI Library",
   "scripts": {
     "test": "cross-env NODE_ENV=test jest --config=jest.config.js --runInBand",
