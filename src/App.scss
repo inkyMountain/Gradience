@@ -7,8 +7,8 @@
   border-right: lightgray 1px solid;
 
   .directory {
-    padding: 10px 20px;
     cursor: pointer;
+    padding: 10px 20px;
 
     &:hover {
       background-color: lightblue;
@@ -18,10 +18,12 @@
 
 .component-container {
   flex: 1;
+  padding: 20px;
 }
 
 
-/* ----------------- Reset Style -----------------*/
+/* reset style */
+
 *,
 *::before,
 *::after {

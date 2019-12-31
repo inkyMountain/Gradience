@@ -4,7 +4,7 @@ import React from 'react';
 
 const Loading = ({pastDelay}: LoadingComponentProps) => {
   const loading = <div className="loading">Loading...</div>;
-  const empty = <div></div>;
+  const empty = <div/>;
   return pastDelay ? loading : empty;
 };
 

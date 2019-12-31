@@ -3,8 +3,8 @@ import * as renderer from 'react-test-renderer';
 import React from 'react';
 import {mount} from 'enzyme';
 
-describe('components PageIcon', () => {
-  it('PageIcon UI is correct', () => {
+describe('lib Icon', () => {
+  it('Icon UI is correct', () => {
     const iconJson = renderer.create(<Icon name={'wechat'}/>).toJSON();
     expect(iconJson).toMatchSnapshot();
   });
