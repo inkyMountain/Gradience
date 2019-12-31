@@ -5,6 +5,7 @@
 .directories {
   width: 300px;
   border-right: lightgray 1px solid;
+  user-select: none;
 
   .directory {
     cursor: pointer;
