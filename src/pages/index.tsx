@@ -1,18 +1,12 @@
-import Loadable from 'react-loadable';
-import {LoadingComponentProps} from 'react-loadable';
-import React from 'react';
+import loadable from '@loadable/component';
 
-const Loading = ({pastDelay}: LoadingComponentProps) => {
-  const loading = <div className="loading">Loading...</div>;
-  const empty = <div/>;
-  return pastDelay ? loading : empty;
+const PageIcon = loadable(() => import('./PageIcon/PageIcon'));
+const PageButton = loadable(() => import('./PageButton/PageButton'));
+const PageDialog = loadable(() => import('./PageDialog/PageDialog'));
+
+export default {
+  icon: PageIcon,
+  button: PageButton,
+  dialog: PageDialog
 };
 
-const PageIcon = Loadable({
-  loader: () => import('./PageIcon/PageIcon'),
-  loading: Loading
-});
-
-export {
-  PageIcon
-};

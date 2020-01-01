@@ -6,12 +6,11 @@ interface IconProps extends React.HTMLAttributes<SVGElement> {
   name: string;
 }
 
-const Icon: React.FunctionComponent<IconProps> =
-  (props) => {
-    const {name, className, ...restProps} = props;
-    return <svg className={`component-icon ${className || ''}`} {...restProps}>
-      <use xlinkHref={`#${name}`}/>
-    </svg>;
-  };
+const Icon: React.FunctionComponent<IconProps> = props => {
+  const {name, className, ...restProps} = props;
+  return <svg className={`component-icon ${className || ''}`} {...restProps}>
+    <use xlinkHref={`#${name}`}/>
+  </svg>;
+};
 
 export default Icon;

@@ -8,11 +8,12 @@
   user-select: none;
 
   .directory {
+    display: block;
     cursor: pointer;
     padding: 10px 20px;
 
     &:hover {
-      background-color: lightblue;
+      background-color: rgba(47, 177, 255, 0.1);
     }
   }
 }
