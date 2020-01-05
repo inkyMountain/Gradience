@@ -1,7 +1,9 @@
+@import '../variables';
+
 .gui-button {
   display: inline-block;
   cursor: pointer;
-  border-radius: 6px;
+  border-radius: $gui-radius;
   padding: 0.4em 0.6em;
   transition: opacity 200ms ease, background-position 300ms ease;
   opacity: 1;

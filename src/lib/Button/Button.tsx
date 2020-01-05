@@ -1,5 +1,6 @@
 import React from 'react';
 import './Button.scss';
+import classes from '../../utils/classes';
 import {getRandomColor, ColorType} from '../../utils/colorUtils';
 
 interface ButtonProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -26,7 +27,7 @@ const INVALID_COLOR_MESSAGE =
 const Button: React.FunctionComponent<ButtonProps> = props => {
   const {className, children, color, disable, onClick, ...restProps} = props;
   const isCustomColorValid = colorValidator(color);
-  if (!!color && !isCustomColorValid) console.error(INVALID_COLOR_MESSAGE);
+  !!color && !isCustomColorValid && console.error(INVALID_COLOR_MESSAGE);
 
   const shouldUseCustomColor = !!color && isCustomColorValid;
   const randomColor = getRandomColor(props.colortype || getRandomColorType());
@@ -38,7 +39,7 @@ const Button: React.FunctionComponent<ButtonProps> = props => {
 
   return (
     <div
-      className={`gui-button ${disable ? 'disable' : ''} ${className || ''}`} {...restProps}
+      className={classes('gui-button', `${disable ? 'disable' : ''}`, className)} {...restProps}
       style={buttonStyle}
       onClick={(event) => {
         if (disable === true) return;

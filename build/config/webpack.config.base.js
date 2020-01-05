@@ -1,5 +1,6 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const {CleanWebpackPlugin} = require('clean-webpack-plugin');
 
 module.exports = {
   entry: path.resolve(__dirname, '../../', 'src/index.tsx'),
@@ -40,6 +41,7 @@ module.exports = {
     //  auto inject .js file to template.html
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, '../../', 'template.html'),
-    })
+    }),
+    new CleanWebpackPlugin()
   ],
 };

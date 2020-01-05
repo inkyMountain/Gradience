@@ -20,17 +20,19 @@ const routes = Object.entries(pages).reduce((previous, current) => {
 }, []);
 
 const App: React.FunctionComponent = () => {
-  return <Router>
-    <div id="app">
-      <aside className="directories">
-        <ul>{links}</ul>
-      </aside>
+  return (
+    <Router>
+      <div id="app">
+        <aside className="directories">
+          <ul>{links}</ul>
+        </aside>
 
-      <main className="component-container">
-        <Switch>{routes}</Switch>
-      </main>
-    </div>
-  </Router>;
+        <main className="component-container">
+          <Switch>{routes}</Switch>
+        </main>
+      </div>
+    </Router>
+  );
 };
 
 export {App};
