@@ -19,7 +19,10 @@ const buttons = ['red', 'orange', 'yellow', 'green', 'blue', 'khaki'].map(
 
 const PageButton: React.FunctionComponent<React.PropsWithChildren<PageButtonProps>> = props => {
   return (
-    <div className='page-button'>{...buttons}</div>
+    <div className='page-button'>
+      {...buttons}
+      <Button ghost={true} onClick={() => {console.log('ghost');}}>Ghost</Button>
+    </div>
   );
 };
 

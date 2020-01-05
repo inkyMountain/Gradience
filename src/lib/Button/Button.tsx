@@ -6,7 +6,8 @@ import {getRandomColor, ColorType} from '../../utils/colorUtils';
 interface ButtonProps extends React.HTMLAttributes<HTMLDivElement> {
   colortype?: ColorType
   color?: string,
-  disable?: boolean
+  disable?: boolean,
+  ghost?: boolean,
 }
 
 const colorValidator = (color: string | undefined): boolean => {
@@ -25,7 +26,7 @@ const INVALID_COLOR_MESSAGE =
    this regex: /^#[\\da-z]{6,8}$/, for example #ffffff .`;
 
 const Button: React.FunctionComponent<ButtonProps> = props => {
-  const {className, children, color, disable, onClick, ...restProps} = props;
+  const {className, children, color, disable, onClick, ghost, ...restProps} = props;
   const isCustomColorValid = colorValidator(color);
   !!color && !isCustomColorValid && console.error(INVALID_COLOR_MESSAGE);
 
@@ -36,6 +37,7 @@ const Button: React.FunctionComponent<ButtonProps> = props => {
     'backgroundImage': `linear-gradient(to right, ${finalColor}66, white)`,
     border: `${finalColor} 1px solid`,
   };
+  ghost && delete buttonStyle.backgroundImage;
 
   return (
     <div
