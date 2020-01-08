@@ -1,5 +1,4 @@
-#app {
-  display: flex;
+#root {
 }
 
 .directories {
@@ -19,6 +18,8 @@
 .component-container {
   flex: 1;
   padding: 20px;
+  height: 100%;
+  overflow: auto;
 }
 
 /* reset style */
@@ -46,6 +47,6 @@ li {
   list-style: none;
 }
 
-html, body, #root, #app {
+html, body, #root {
   height: 100%;
 }

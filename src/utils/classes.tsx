@@ -1,5 +1,10 @@
 const classes = (...classNames: Array<string | undefined>) => {
-  return classNames.filter(Boolean).map(className => (className as string).trim()).join(' ');
+  return classNames
+    .filter(Boolean)
+    .map(className => className!.trim().replace(/\s+/, ' ').split(' '))
+    .toString()
+    .split(',')
+    .join(' ');
 };
 
 export default classes;

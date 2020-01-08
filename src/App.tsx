@@ -1,6 +1,9 @@
 import React from 'react';
 import './App.scss';
 import pages from './pages/index';
+import Aside from './lib/Layout/Aside';
+import Content from './lib/Layout/Content';
+import Layout from './lib/Layout/Layout';
 import {HashRouter as Router, Switch, Route, Link} from 'react-router-dom';
 
 const links = Object.keys(pages).reduce((previous, current) => {
@@ -9,28 +12,30 @@ const links = Object.keys(pages).reduce((previous, current) => {
       {current}
     </Link>
   );
-  previous.push(directory);
-  return previous;
-}, [] as React.ReactNode[]);
+  return previous.concat(directory);
+}, [] as Array<React.ReactNode>);
 
 const routes = Object.entries(pages).reduce((previous, current) => {
   const [name, component] = current;
-  const route = <Route path={`/${name}`} component={component} key={Math.random()}/>;
+  const route = <Route path={`/${name}`} component={component} key={name}/>;
   return [...previous, route];
 }, []);
 
 const App: React.FunctionComponent = () => {
   return (
     <Router>
-      <div id="app">
-        <aside className="directories">
+      <Layout>
+        <Aside className="directories">
           <ul>{links}</ul>
-        </aside>
+        </Aside>
 
-        <main className="component-container">
-          <Switch>{routes}</Switch>
-        </main>
-      </div>
+        <Content className="component-container">
+          <Switch>
+            {routes}
+            <Route path={'/'} component={pages.icon}/>
+          </Switch>
+        </Content>
+      </Layout>
     </Router>
   );
 };

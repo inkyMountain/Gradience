@@ -1,0 +1,24 @@
+[class^=gui-layout] {
+  overflow: auto;
+}
+
+.gui-layout {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  &.verticle {
+    flex-direction: column;
+  }
+  .gui-layout-content {
+    flex: 1;
+  }
+  .gui-layout-aside {
+    flex-shrink: 0;
+  }
+  .gui-layout-header {
+    flex-shrink: 0;
+  }
+  .gui-layout-footer {
+    flex-shrink: 0;
+  }
+}
