@@ -1,13 +1,14 @@
 import React from 'react';
+import classes from '../../utils/classes';
 
 interface HeaderProps extends React.PropsWithChildren<any> {
 
 }
 
 const Layout: React.FC<HeaderProps> = props => {
-  const {children, ...restProps} = props;
+  const {children, className, ...restProps} = props;
   return (
-    <div className="gui-layout-header" {...restProps}>
+    <div className={classes('gui-layout-header', className)} {...restProps}>
       {children}
     </div>
   );

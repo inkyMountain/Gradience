@@ -1,13 +1,14 @@
 import React from 'react';
+import classes from '../../utils/classes';
 
 interface AsideProps extends React.PropsWithChildren<any> {
 
 }
 
 const Layout: React.FC<AsideProps> = props => {
-  const {children, ...restProps} = props;
+  const {children, className, ...restProps} = props;
   return (
-    <div className="gui-layout-aside" {...restProps}>
+    <div className={classes('gui-layout-aside', className)} {...restProps}>
       {children}
     </div>
   );

@@ -1,13 +1,14 @@
 import React from 'react';
+import classes from '../../utils/classes';
 
 interface FooterProps extends React.PropsWithChildren<any> {
 
 }
 
 const Layout: React.FC<FooterProps> = props => {
-  const {children, ...restProps} = props;
+  const {children, className, ...restProps} = props;
   return (
-    <div className="gui-layout-footer" {...restProps}>
+    <div className={classes('gui-layout-footer', className)} {...restProps}>
       {children}
     </div>
   );
