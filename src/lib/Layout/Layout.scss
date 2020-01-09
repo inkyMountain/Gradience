@@ -9,16 +9,16 @@
   &.verticle {
     flex-direction: column;
   }
-  .gui-layout-content {
+  & > .gui-layout-content {
     flex: 1;
   }
-  .gui-layout-aside {
+  & > .gui-layout-aside {
     flex-shrink: 0;
   }
-  .gui-layout-header {
+  & > .gui-layout-header {
     flex-shrink: 0;
   }
-  .gui-layout-footer {
+  & > .gui-layout-footer {
     flex-shrink: 0;
   }
 }
