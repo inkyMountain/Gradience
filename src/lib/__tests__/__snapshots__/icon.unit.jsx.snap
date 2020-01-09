@@ -2,7 +2,7 @@
 
 exports[`lib Icon Icon UI is correct 1`] = `
 <svg
-  className="component-icon "
+  className="component-icon"
 >
   <use
     xlinkHref="#wechat"

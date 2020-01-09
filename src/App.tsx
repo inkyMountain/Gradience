@@ -1,9 +1,7 @@
 import React from 'react';
 import './App.scss';
 import pages from './pages/index';
-import Aside from './lib/Layout/Aside';
-import Content from './lib/Layout/Content';
-import Layout from './lib/Layout/Layout';
+import {Layout, Content, Aside, Header, Footer} from './lib/Layout/Layout';
 import {HashRouter as Router, Switch, Route, Link} from 'react-router-dom';
 
 const links = Object.keys(pages).reduce((previous, current) => {
@@ -24,17 +22,28 @@ const routes = Object.entries(pages).reduce((previous, current) => {
 const App: React.FunctionComponent = () => {
   return (
     <Router>
-      <Layout>
-        <Aside className="directories">
-          <ul>{links}</ul>
-        </Aside>
+      <Layout className={'page-container'}>
+        <Header className={'header'}>
+          Gradience UI
+        </Header>
 
-        <Content className="component-container">
-          <Switch>
-            {routes}
-            <Route path={'/'} component={pages.icon}/>
-          </Switch>
+        <Content className={'main-content'}>
+          <Layout>
+            <Aside className="directories">
+              <ul>{links}</ul>
+            </Aside>
+            <Content style={{'overflow': 'initial'}}>
+              <Switch>
+                {routes}
+                <Route path={'/'} component={pages.icon}/>
+              </Switch>
+            </Content>
+          </Layout>
         </Content>
+
+        <Footer className={'footer'}>
+          Footer
+        </Footer>
       </Layout>
     </Router>
   );
