@@ -40,11 +40,11 @@
     "noUnusedLocals": true
   },
   "include": [
-    "src/**/*",
-    "include/**/*",
-    "examples/**/*",
-    "types/**/*",
-    "test/**/*"
+    "src/**/*"
+    //    "include/**/*",
+    //    "examples/**/*",
+    //    "types/**/*",
+    //    "test/**/*"
   ],
   "exclude": [
     "node_modules",

@@ -23,6 +23,20 @@ module.exports = {
         test: /\.s[ac]ss$/i,
         use: ['style-loader', 'css-loader', 'sass-loader'],
       },
+      {
+        test: /\.(jpe?g|png|gif)$/i, //图片文件
+        loader: 'url-loader',
+        options: {
+          limit: 10240,
+          fallback: {
+            loader: 'file-loader',
+            options: {
+              name: `img/[name].[contenthash:8].[ext]`,
+              esModule: false
+            }
+          }
+        }
+      },
     ]
   },
 

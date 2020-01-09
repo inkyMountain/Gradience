@@ -3,6 +3,7 @@ import './App.scss';
 import pages from './pages/index';
 import {Layout, Content, Aside, Header, Footer} from './lib/Layout/Layout';
 import {HashRouter as Router, Switch, Route, Link} from 'react-router-dom';
+import logo from './static/images/logo.png';
 
 const links = Object.keys(pages).reduce((previous, current) => {
   const directory = (
@@ -24,7 +25,7 @@ const App: React.FunctionComponent = () => {
     <Router>
       <Layout className={'page-container'}>
         <Header className={'header'}>
-          Gradience UI
+          <img src={logo} alt="logo" width={100} height={100}/>
         </Header>
 
         <Content className={'main-content'}>
