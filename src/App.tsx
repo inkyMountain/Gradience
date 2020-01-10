@@ -1,8 +1,9 @@
 import React from 'react';
 import './App.scss';
 import pages from './pages/index';
-import {Layout, Content, Aside, Header} from './lib/Layout/Layout';
+import {Layout, Content, Aside, Header, Footer} from './lib/Layout/Layout';
 import {HashRouter as Router, Switch, Route, Link} from 'react-router-dom';
+import logo from './static/images/logo.png';
 
 const links = Object.keys(pages).reduce((previous, current) => {
   const directory = (
@@ -23,16 +24,16 @@ const App: React.FunctionComponent = () => {
   return (
     <Router>
       <Layout className={'page-container'}>
-        <Header className={'global-header'}>
-          Gradience UI
+        <Header className={'header'}>
+          <img src={logo} alt="logo" width={100} height={100}/>
         </Header>
 
-        <Content className={'global-main'}>
+        <Content className={'main-content'}>
           <Layout>
             <Aside className="directories">
               <ul>{links}</ul>
             </Aside>
-            <Content>
+            <Content style={{'overflow': 'initial'}}>
               <Switch>
                 {routes}
                 <Route path={'/'} component={pages.icon}/>
@@ -41,6 +42,9 @@ const App: React.FunctionComponent = () => {
           </Layout>
         </Content>
 
+        <Footer className={'footer'}>
+          Footer
+        </Footer>
       </Layout>
     </Router>
   );
