@@ -1,7 +1,7 @@
 import React from 'react';
 import classes from '../../utils/classes';
 
-interface AsideProps extends React.PropsWithChildren<any> {
+interface AsideProps extends React.HTMLAttributes<any> {
 
 }
 

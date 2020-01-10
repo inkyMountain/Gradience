@@ -3,7 +3,7 @@ import React, {ReactElement} from 'react';
 import Aside from './Aside';
 import classes from '../../utils/classes';
 
-interface LayoutProps extends React.PropsWithChildren<any> {
+interface LayoutProps extends React.HTMLAttributes<any> {
 
 }
 

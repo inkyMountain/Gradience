@@ -1,7 +1,7 @@
 import React from 'react';
 import classes from '../../utils/classes';
 
-interface FooterProps extends React.PropsWithChildren<any> {
+interface FooterProps extends React.HTMLAttributes<any> {
 
 }
 
