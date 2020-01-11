@@ -41,7 +41,7 @@ module.exports = {
   },
 
   output: {
-    filename: 'index.[chunkhash].js',
+    filename: 'index.[contenthash].js',
     path: path.resolve(__dirname, '../../', 'dist'),
     // umd is both compatiable for nodejs and browser
     libraryTarget: 'umd'
