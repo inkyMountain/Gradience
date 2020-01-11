@@ -1,0 +1,10 @@
+.code-fragment-component {
+  & > pre.prism-code {
+    padding: 0 20px;
+    overflow-x: auto;
+    width: 100%;
+  }
+  .plain:not(:first-child) {
+    padding-left: 5px;
+  }
+}
