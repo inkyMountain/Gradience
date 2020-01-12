@@ -50,6 +50,7 @@
     "node_modules",
     "build",
     "dist",
+    "docs",
     "scripts",
     "acceptance-tests",
     "webpack",

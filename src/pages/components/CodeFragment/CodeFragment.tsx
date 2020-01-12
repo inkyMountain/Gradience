@@ -10,7 +10,7 @@ export interface CodeFragmentProps {
 const CodeFragment: React.FunctionComponent<CodeFragmentProps> = props => {
   return (
     <div className='code-fragment-component'>
-      <Highlight {...defaultProps} theme={theme} code={props.children} language="jsx">
+      <Highlight {...defaultProps} theme={theme} code={props.children} language="tsx">
         {({className, style, tokens, getLineProps, getTokenProps}) => (
           <pre className={className} style={style}>
         {tokens.map((line, i) => (

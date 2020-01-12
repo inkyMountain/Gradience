@@ -1,0 +1,14 @@
+.page-layout {
+  .example {
+    height: 400px;
+    width: 300px;
+    margin: 20px;
+    background-color: lightskyblue;
+    &:first-child {
+      margin-top: 0;
+    }
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}

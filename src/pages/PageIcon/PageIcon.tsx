@@ -8,7 +8,6 @@ export interface PageIconProps {
 }
 
 const {default: codeExample} = require('!!raw-loader!../../lib/Icon/Icon.example');
-console.log(codeExample);
 const PageIcon: React.FunctionComponent<PageIconProps> = props => {
   return <div className='page-icon'>
     <Icon name='wechat'/>
