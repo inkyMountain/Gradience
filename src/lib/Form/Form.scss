@@ -1,0 +1,8 @@
+@import '../base';
+@import '../variables';
+
+.gui-form {
+  & > input {
+    border: 1px cornflowerblue solid;
+  }
+}
