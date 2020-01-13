@@ -1,15 +1,15 @@
 import React from 'react';
+import {HashRouter as Router, Switch, Route, NavLink} from 'react-router-dom';
 import './App.scss';
 import pages from './pages/index';
 import {Layout, Content, Aside, Header, Footer} from './lib/Layout/Layout';
-import {HashRouter as Router, Switch, Route, Link} from 'react-router-dom';
-import logo from './static/images/logo.png';
+import GuardedRoute from './pages/components/GuardedRoute/GuardedRoute';
 
 const links = Object.keys(pages).reduce((previous, current) => {
   const directory = (
-    <Link className="directory" to={`/${current}`} key={Math.random()} draggable={false}>
+    <NavLink className="directory" to={`/${current}`} key={Math.random()} draggable={false}>
       {current}
-    </Link>
+    </NavLink>
   );
   return previous.concat(directory);
 }, [] as Array<React.ReactNode>);
@@ -23,29 +23,35 @@ const routes = Object.entries(pages).reduce((previous, current) => {
 const App: React.FunctionComponent = () => {
   return (
     <Router>
-      <Layout className={'page-container'}>
-        <Header className={'header'}>
-          <img src={logo} alt="logo" width={100} height={100}/>
-        </Header>
+      <GuardedRoute>
+        <Layout className='page-container'>
+          <Aside className="directories">
+            <Layout>
+              <Header className={'aside-header'}>
+                <h1 className="framework-name">Gradience</h1>
+                <div className="introduction">React UI Framework</div>
+              </Header>
+              <Content>
+                <ul>{links}</ul>
+              </Content>
+              <Footer className={'aside-footer'}>
+                Developed By CYT
+              </Footer>
+            </Layout>
+          </Aside>
 
-        <Content className={'main-content'}>
-          <Layout>
-            <Aside className="directories">
-              <ul>{links}</ul>
-            </Aside>
-            <Content style={{'overflow': 'initial'}}>
-              <Switch>
-                {routes}
-                <Route path={'/'} component={pages.icon}/>
-              </Switch>
-            </Content>
-          </Layout>
-        </Content>
-
-        <Footer className={'footer'}>
-          Footer
-        </Footer>
-      </Layout>
+          <Content className='global-main'>
+            <Layout>
+              <Content>
+                <Switch>
+                  {routes}
+                  <Route path='/' component={pages.icon}/>
+                </Switch>
+              </Content>
+            </Layout>
+          </Content>
+        </Layout>
+      </GuardedRoute>
     </Router>
   );
 };

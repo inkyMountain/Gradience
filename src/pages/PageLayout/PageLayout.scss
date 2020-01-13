@@ -1,14 +1,59 @@
+@import '../../variables';
+
+@mixin lightblue-background {
+  background-image: linear-gradient(to bottom right, $theme-color-lighter, $theme-color-lightest);
+}
+
+@mixin mediumblue-background {
+  background-image: linear-gradient(to bottom right, $theme-color-normal, $theme-color-lighter);
+}
+
+@mixin deepblue-background {
+  background-image: linear-gradient(to bottom right, $theme-color-darker, $theme-color-normal);
+}
+
+
 .page-layout {
+  & [class^=gui-layout-] {
+    padding: $gui-length-basic;
+  }
+
   .example {
     height: 400px;
-    width: 300px;
-    margin: 20px;
-    background-color: lightskyblue;
+    margin: $gui-length-basic * 2;
+    padding: $gui-length-basic * 2;
+    background-color: $gui-main-gray;
+    user-select: none;
     &:first-child {
-      margin-top: 0;
+      margin-top: $gui-length-basic;
     }
     &:last-child {
-      margin-bottom: 0;
+      margin-bottom: $gui-length-basic;
+    }
+
+    .gui-layout {
+      & > .gui-layout-header {
+        @include lightblue-background;
+        margin-bottom: $gui-length-basic;
+      }
+      & > .gui-layout-header + .gui-layout-content {
+        @include deepblue-background;
+      }
+      & > .gui-layout-content {
+        @include deepblue-background;
+      }
+      & > .gui-layout-aside {
+        @include mediumblue-background;
+        margin-right: $gui-length-basic;
+      }
+      & + .gui-layout-footer {
+        @include lightblue-background;
+        margin-top: $gui-length-basic;
+      }
+      & > .gui-layout-content + .gui-layout-footer {
+        @include lightblue-background;
+        margin-top: $gui-length-basic;
+      }
     }
   }
 }
