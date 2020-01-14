@@ -1,0 +1,13 @@
+$gui-radius: 5px;
+$gui-theme-color: #2fb1ff;
+$gui-main-gray: #f2f2f2;
+$gui-faint-gray: #f8f8f8;
+
+$gui-length-basic: 6px;
+
+$theme-color-lightest: lighten($gui-theme-color, 30%);
+$theme-color-lighter: lighten($gui-theme-color, 15%);
+$theme-color-normal: $gui-theme-color;
+$theme-color-darker: darken($gui-theme-color, 15%);
+$theme-color-darkest: darken($gui-theme-color, 30%);
+

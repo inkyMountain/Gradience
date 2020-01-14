@@ -1,4 +1,4 @@
-@import '../../variables';
+@import '../../lib/variables';
 
 @mixin lightblue-background {
   background-image: linear-gradient(to bottom right, $theme-color-lighter, $theme-color-lightest);
