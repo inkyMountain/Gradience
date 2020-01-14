@@ -5,12 +5,13 @@
   cursor: pointer;
   border-radius: $gui-radius;
   padding: 0.4em 0.6em;
+  font-size: 1em;
   transition: opacity 200ms ease, background-position 300ms ease;
   opacity: 1;
   color: #4f4f4f;
   background-color: white;
   user-select: none;
-  background-size: 200%;
+  background-size: 200% 100%;
   background-position: right 0 top 0;
   margin: 0 5px;
   &.disable {
@@ -18,6 +19,9 @@
     cursor: not-allowed;
   }
   // Stop background change when disable flag is on.
+  &:hover:not(.disable) {
+    background-position: right 40% top 0;
+  }
   &:active:not(.disable) {
     background-position: right 100% top 0;
   }

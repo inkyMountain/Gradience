@@ -2,7 +2,26 @@
 @import '../variables';
 
 .gui-form {
-  & > input {
-    border: 1px cornflowerblue solid;
+  &-table {border-collapse: collapse;}
+
+  &-label {
+    vertical-align: top;
+    line-height: $gui-line-height;
+    & > div {padding: 10px 0}
+  }
+
+  &-label + &-label {margin-top: 8px;}
+
+  &-label + &-input {padding-left: 8px;}
+
+  &-input {
+    display: flex;
+    flex-direction: column;
+    .error {
+      color: lightpink;
+      min-height: 2em;
+      line-height: 1.5em;
+      padding: 0.25em 0;
+    }
   }
 }

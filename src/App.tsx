@@ -5,7 +5,7 @@ import pages from './pages/index';
 import {Layout, Content, Aside, Header, Footer} from './lib/Layout/Layout';
 import GuardedRoute from './pages/components/GuardedRoute/GuardedRoute';
 
-const links = Object.keys(pages).reduce((previous, current) => {
+const navLinks = Object.keys(pages).reduce((previous, current) => {
   const directory = (
     <NavLink className="directory" to={`/${current}`} key={Math.random()} draggable={false}>
       {current}
@@ -32,7 +32,7 @@ const App: React.FunctionComponent = () => {
                 <div className="introduction">React UI Framework</div>
               </Header>
               <Content>
-                <ul>{links}</ul>
+                <ul>{navLinks}</ul>
               </Content>
               <Footer className={'aside-footer'}>
                 Developed By CYT

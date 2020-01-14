@@ -3,7 +3,7 @@ import './Button.scss';
 import classes from '../../utils/classes';
 import {getRandomColor, ColorType} from '../../utils/colorUtils';
 
-interface ButtonProps extends React.HTMLAttributes<HTMLDivElement> {
+interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   colortype?: ColorType
   color?: string,
   disable?: boolean,
@@ -27,12 +27,10 @@ const INVALID_COLOR_MESSAGE =
 
 const Button: React.FunctionComponent<ButtonProps> = props => {
   const {className, children, color, disable, onClick, ghost, ...restProps} = props;
-  const isCustomColorValid = colorValidator(color);
-  !!color && !isCustomColorValid && console.error(INVALID_COLOR_MESSAGE);
+  !!color && !colorValidator(color) && console.error(INVALID_COLOR_MESSAGE);
 
-  const shouldUseCustomColor = !!color && isCustomColorValid;
-  const randomColor = getRandomColor(props.colortype || getRandomColorType());
-  const finalColor = shouldUseCustomColor ? color : randomColor;
+  const finalColor = color && colorValidator(color)
+    ? color : getRandomColor(props.colortype || getRandomColorType());
   const buttonStyle = {
     'backgroundImage': `linear-gradient(to right, ${finalColor}66, white)`,
     border: `${finalColor} 1px solid`,
@@ -40,7 +38,7 @@ const Button: React.FunctionComponent<ButtonProps> = props => {
   ghost && delete buttonStyle.backgroundImage;
 
   return (
-    <div
+    <button
       className={classes('gui-button', `${disable ? 'disable' : ''}`, className)} {...restProps}
       style={buttonStyle}
       onClick={(event) => {
@@ -49,7 +47,7 @@ const Button: React.FunctionComponent<ButtonProps> = props => {
       }}
     >
       {children}
-    </div>
+    </button>
   );
 };
 

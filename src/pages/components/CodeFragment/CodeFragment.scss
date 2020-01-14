@@ -1,6 +1,9 @@
 .code-fragment-component {
   & > pre.prism-code {
-    padding: 0 20px;
+    font-family: "Fira Code", monospace, Consolas;
+    font-size: 13px;
+    line-height: 1.4em;
+    padding: 20px 20px 0 20px;
     overflow-x: auto;
     width: 100%;
   }

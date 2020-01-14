@@ -1,0 +1,18 @@
+@import '../base';
+@import '../variables';
+
+.gui-input {
+  padding: 10px;
+  border-radius: $gui-radius;
+  border: solid 1px $theme-color-normal;
+  // 有渐变 -> 无渐变 的时长
+  transition: border-color 500ms;
+  background-image: linear-gradient(white, white), linear-gradient(to right, cyan, lightgreen 150%);
+  background-clip: padding-box, border-box;
+  line-height: $gui-line-height;
+  &:focus {
+    // 无渐变 -> 有渐变 的时长
+    transition: border-color 300ms;
+    border-color: transparent;
+  }
+}

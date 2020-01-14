@@ -14,8 +14,8 @@ import './Dialog.scss';
 
 interface DialogProps extends React.HTMLAttributes<HTMLDivElement> {
   visible: boolean,
-  onConfirm?: (event: React.MouseEvent<HTMLDivElement>) => void,
-  onCancel?: (event: React.MouseEvent<HTMLDivElement>) => void,
+  onConfirm?: (event: React.MouseEvent<HTMLButtonElement>) => void,
+  onCancel?: (event: React.MouseEvent<HTMLButtonElement | HTMLDivElement>) => void,
   titleNode?: ReactNode,
   buttons?: ReactElement | ReactFragment,
 }
@@ -40,7 +40,7 @@ interface ConfirmParams {
 
 interface AlertParams {
   content: ReactNode,
-  onConfirm?: (event: React.MouseEvent<HTMLDivElement>) => void,
+  onConfirm?: (event: React.MouseEvent<HTMLButtonElement>) => void,
 }
 
 const gradiences = [

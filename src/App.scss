@@ -15,7 +15,13 @@
   background-image: linear-gradient(to right, darken($gui-main-gray, 5%), white);
   .aside-header {
     padding: 16px 16px 16px 20px;
-    .framework-name {color: $gui-theme-color;}
+    .framework-name {
+      font-size: 20px;
+      //background-image: linear-gradient(to right, $theme-color-normal, gold);
+      background-image: linear-gradient(to right, $theme-color-normal, gold);
+      color: transparent;
+      -webkit-background-clip: text;
+    }
     .introduction {
       font-size: 12px;
       color: gray;
