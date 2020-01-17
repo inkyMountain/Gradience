@@ -9,14 +9,14 @@ interface FormProps {
   className?: string,
   style?: CSSProperties,
   buttons: ReactElement,
-  errors: Array<string>
+  errors: { [name: string]: Array<string> | string }
 }
 
 export interface Field {
+  name: string,
   label: string,
   value?: string,
   placeholder?: string,
-  error?: Array<string> | string,
 }
 
 export type OnInputChange = (
@@ -53,7 +53,7 @@ const Form: React.FC<FormProps> = props => {
         )}
         <tr>
           <td/>
-          <td>{buttons}</td>
+          <td className={'gui-form-buttons'}>{buttons}</td>
         </tr>
         </tbody>
       </table>

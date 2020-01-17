@@ -3,10 +3,7 @@ import Form from './Form';
 import {Field, OnInputChange} from './Form';
 import Button from '../Button/Button';
 import validator from './validator';
-
-// const rules = [
-//   {name: ''}
-// ]
+import {Errors} from './validator';
 
 const FormExample: React.FC = props => {
   const onInputChange: OnInputChange = ({index, newContent}) => {
@@ -14,16 +11,21 @@ const FormExample: React.FC = props => {
     fields[index].value = newContent;
     setFields(fields);
   };
-  const onSubmit = (event: FormEvent) => {
-    setErrors(validator([]));
-    console.log('表单提交');
-  };
   const [fields, setFields] = useState<Array<Field>>([
-    {label: '早饭吃什么', value: '早饭'},
-    {label: '中饭吃什么', value: '中饭'},
-    {label: '晚饭吃什么呀呀呀呀呀呀', value: '晚饭'}
+    {label: '早饭', value: '油条豆浆', name: 'breakfast'},
+    {label: '中饭', value: '盖浇饭', name: 'meal'},
+    {label: '晚饭', value: '牛排', name: 'dinner'}
   ]);
-  const [errors, setErrors] = useState<Array<string>>(['']);
+  const onSubmit = (event: FormEvent) => {
+    const errors = validator({
+      breakfast: {required: [true, '必须要吃早饭哦']},
+      meal: {required: [true, '必须要吃中饭哦']},
+      dinner: {required: [true, '必须要吃晚饭哦']},
+    }, fields);
+    console.log(errors);
+    setErrors(errors);
+  };
+  const [errors, setErrors] = useState<Errors>({});
   const FormButtons = <Button type={'submit'}>提交</Button>;
 
   return (
@@ -39,3 +41,7 @@ const FormExample: React.FC = props => {
 };
 
 export default FormExample;
+
+
+
+
