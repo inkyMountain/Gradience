@@ -2,44 +2,63 @@ import {Field} from './Form';
 
 interface Rules {
   [name: string]: {
-    pattern?: [RegExp, string],
-    required?: [boolean, string],
-    lengthRange?: [[number, number], string],
-    validate?: [(value: string) => Promise<any> | boolean, string]
+    pattern?: RegExp,
+    required?: boolean,
+    lengthRange?: [number, number],
+    validate?: (value: string) => Promise<void> | boolean,
+    suggestion?: string
   }
 }
 
-export interface Errors {
-  [name: string]: Array<string>
+export interface SyncErrors {
+  pattern: boolean,
+  required: boolean,
+  lengthRange: boolean,
 }
 
-const validator = (rules: Rules, fields: Array<Field>): Errors =>
-  fields.reduce<Errors>((errors, field) => {
-    console.log('field', field);
+interface BooleanObject {
+  [Key: string]: boolean
+}
+
+const allSettled = (promises: Array<Promise<any>>) =>
+  Promise.all(promises.map(
+    (promise) => promise
+      .then((result) => ({status: 'fulfilled', message: result}))
+      .catch(reason => ({status: 'rejected', message: reason}))
+  ));
+
+
+const validator = (rules: Rules, fields: Array<Field>, onComplete: (result: { [Key: string]: boolean }) => void) => {
+  const syncResult = fields.reduce<BooleanObject>((errors, field) => {
     const {value = '', name} = field;
-    errors[name] = [];
-    const addError = (e: string) => errors[name].push(e);
     const {
-      pattern = [/.*/],
-      required = [false, ''],
-      lengthRange = [[0, Infinity]],
-      validate = [() => true]
+      pattern = /.*/,
+      required = false,
+      lengthRange = [0, Infinity],
     } = rules[name];
-    if (!pattern[0].test(field.value || '')) {
-      addError(pattern[1] as string);
-    }
-    if (required[0] && value.length < 0 && (required[1] as string).length > 0) {
-      addError(required[1] as string);
-    }
-    const [min, max] = lengthRange[0];
-    if (value.length < min || value.length > max) {
-      addError(lengthRange[1] as string);
-    }
-    if (!validate[0](value)) {
-      addError(validate[1] as string);
-    }
+    errors[name] = pattern.test(value)
+                   && (required ? value.length > 0 : true)
+                   && (value.length >= lengthRange[0] && value.length <= lengthRange[1]);
     return errors;
   }, {});
+  const promises = fields.map((field) => {
+    const {value = '', name} = field;
+    const validate = rules[name].validate || (() => true);
+    const validateResult = validate(value);
+    return typeof validateResult === 'boolean'
+           ? Promise.resolve({name, success: validateResult})
+           : validateResult
+             .then((result) => ({name, success: true}))
+             .catch(() => ({name, success: false}));
+  });
+  allSettled(promises).then(results => {
+    results.map(result => {
+      const {name, success} = result.message;
+      syncResult[name] = syncResult[name] && success;
+    });
+    onComplete(syncResult);
+  });
+};
 
 
 export default validator;

@@ -1,38 +1,52 @@
 import React, {FormEvent, Fragment, useState} from 'react';
 import Form from './Form';
 import {Field, OnInputChange} from './Form';
-import Button from '../Button/Button';
 import validator from './validator';
-import {Errors} from './validator';
+
+function checkUnique(value: string) {
+  return new Promise<void>((resolve, reject) => {
+    setTimeout(() => {
+      // const success = Math.random() > 0.5;
+      // success ? resolve(true) : reject(false);
+      reject();
+    }, 2000);
+  });
+}
 
 const FormExample: React.FC = props => {
-  const onInputChange: OnInputChange = ({index, newContent}) => {
-    console.log(index, newContent);
-    fields[index].value = newContent;
-    setFields(fields);
-  };
   const [fields, setFields] = useState<Array<Field>>([
     {label: '早饭', value: '油条豆浆', name: 'breakfast'},
     {label: '中饭', value: '盖浇饭', name: 'meal'},
     {label: '晚饭', value: '牛排', name: 'dinner'}
   ]);
-  const onSubmit = (event: FormEvent) => {
-    const errors = validator({
-      breakfast: {required: [true, '必须要吃早饭哦']},
-      meal: {required: [true, '必须要吃中饭哦']},
-      dinner: {required: [true, '必须要吃晚饭哦']},
-    }, fields);
-    console.log(errors);
-    setErrors(errors);
+  const onInputChange: OnInputChange = ({index, newContent}) => {
+    console.log(index, newContent);
+    fields[index].value = newContent;
+    setFields([...fields]);
   };
-  const [errors, setErrors] = useState<Errors>({});
-  const FormButtons = <Button type={'submit'}>提交</Button>;
+  const onSubmit = (event: FormEvent) => {
+    validator({
+      breakfast: {required: true},
+      meal: {required: true, validate: value => false},
+      dinner: {
+        required: false,
+        validate: (value) => {
+          return checkUnique(value);
+        },
+        suggestion: '晚饭一定要吃的哦晚饭一定要吃的哦晚饭一定要吃的哦'
+      },
+    }, fields, (errors) => {
+      console.log('errors', errors);
+      setErrors(errors);
+    });
+  };
+  const [errors, setErrors] = useState<{ [Key: string]: boolean }>({});
 
   return (
     <Fragment>
       <div className="form-example">
         <Form fields={fields} onChange={onInputChange}
-              onSubmit={onSubmit} buttons={FormButtons}
+              onSubmit={onSubmit}
               errors={errors}
         />
       </div>

@@ -1,6 +1,7 @@
 import React, {ChangeEvent, CSSProperties, FormEvent, ReactElement} from 'react';
 import Input from '../Input/Input';
 import './Form.scss';
+import Button from '../Button/Button';
 
 interface FormProps {
   fields: Field[],
@@ -8,8 +9,8 @@ interface FormProps {
   onSubmit: (event: FormEvent) => void,
   className?: string,
   style?: CSSProperties,
-  buttons: ReactElement,
-  errors: { [name: string]: Array<string> | string }
+  buttons?: ReactElement,
+  errors: { [Key: string]: boolean }
 }
 
 export interface Field {
@@ -29,12 +30,14 @@ const Form: React.FC<FormProps> = props => {
   const onChange = (index: number, newContent: string, event: ChangeEvent) => {
     props.onChange({index, newContent}, event);
   };
+
+
   return (
-    <form className={'gui-form'} onSubmit={(event => {
+    <form className={'gui-form'} onSubmit={event => {
       event.preventDefault();
       props.onSubmit(event);
-    })}>
-      <table className={'gui-form-table'}>
+    }}>
+      <table className='gui-form-table'>
         <tbody>
         {fields.map((field, index) =>
           <tr key={index}>
@@ -47,13 +50,15 @@ const Form: React.FC<FormProps> = props => {
                      onChange={(event) =>
                        onChange(index, event.target.value, event)
                      }/>
-              <div className="error">{errors[index]}</div>
+              <div className="error">{errors[field.name]}</div>
             </td>
           </tr>
         )}
         <tr>
           <td/>
-          <td className={'gui-form-buttons'}>{buttons}</td>
+          <td className={'gui-form-buttons'}>
+            {buttons || <Button type={'submit'}>提交</Button>}
+          </td>
         </tr>
         </tbody>
       </table>
