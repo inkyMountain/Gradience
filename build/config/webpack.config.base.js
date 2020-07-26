@@ -43,7 +43,7 @@ module.exports = {
   output: {
     filename: 'index.[contenthash].js',
     path: path.resolve(__dirname, '../../', 'dist'),
-    // umd is both compatiable for nodejs and browser
+    // umd is both compatible for nodejs and browser
     libraryTarget: 'umd'
   },
 

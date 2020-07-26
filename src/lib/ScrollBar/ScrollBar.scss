@@ -1,0 +1,13 @@
+.gui-scroll-bar-hider {
+  position: relative;
+  border: 1px solid palevioletred;
+  overflow: hidden;
+
+  .gui-scroll-element {
+    position: absolute;
+    height: 100%;
+    overflow: auto;
+    left: 0;
+    top: 0;
+  }
+}

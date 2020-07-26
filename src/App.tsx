@@ -7,7 +7,10 @@ import GuardedRoute from './pages/components/GuardedRoute/GuardedRoute';
 
 const navLinks = Object.keys(pages).reduce((previous, current) => {
   const directory = (
-    <NavLink className="directory" to={`/${current}`} key={Math.random()} draggable={false}>
+    <NavLink className="directory"
+             to={`/${current}`}
+             key={current}
+             draggable={false}>
       {current}
     </NavLink>
   );
@@ -27,8 +30,8 @@ const App: React.FunctionComponent = () => {
         <Layout className='page-container'>
           <Aside className="directories">
             <Layout>
-              <Header className={'aside-header'}>
-                <h1 className="framework-name">Gradience</h1>
+              <Header className='aside-header'>
+                <h1 className="framework-name">Animal Crossing</h1>
                 <div className="introduction">React UI Framework</div>
               </Header>
               <Content>
