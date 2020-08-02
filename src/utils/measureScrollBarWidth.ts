@@ -1,4 +1,13 @@
+let scrollBarWidth: number;
+
 const measureScrollBarWidth = () => {
+  if (!scrollBarWidth) {
+    scrollBarWidth = _measureScrollBarWidth();
+  }
+  return scrollBarWidth;
+};
+
+const _measureScrollBarWidth = () => {
   const div = document.createElement('div');
   div.style.overflow = 'scroll';
   div.style.width = '100px';

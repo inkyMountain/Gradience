@@ -28,20 +28,23 @@ const App: React.FunctionComponent = () => {
     <Router>
       <GuardedRoute>
         <Layout className='page-container'>
-          <Aside className="directories">
-            <Layout>
-              <Header className='aside-header'>
-                <h1 className="framework-name">Animal Crossing</h1>
-                <div className="introduction">React UI Framework</div>
-              </Header>
-              <Content>
-                <ul>{navLinks}</ul>
-              </Content>
-              <Footer className={'aside-footer'}>
-                Developed By CYT
-              </Footer>
-            </Layout>
-          </Aside>
+          {
+            window.innerWidth >= 600 &&
+            <Aside className="directories">
+              <Layout>
+                <Header className='aside-header'>
+                  <h1 className="framework-name">Animal Crossing</h1>
+                  <div className="introduction">React UI Framework</div>
+                </Header>
+                <Content>
+                  <ul>{navLinks}</ul>
+                </Content>
+                <Footer className={'aside-footer'}>
+                  Developed By CYT
+                </Footer>
+              </Layout>
+            </Aside>
+          }
 
           <Content className='global-main'>
             <Layout>
