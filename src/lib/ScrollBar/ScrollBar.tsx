@@ -1,7 +1,7 @@
 import React, {
   useCallback,
   useEffect,
-  useMemo,
+  // useMemo,
   useRef,
   useState
 } from 'react';
@@ -10,7 +10,7 @@ import './ScrollBar.scss';
 import measureScrollBarWidth from '../../utils/measureScrollBarWidth';
 import {useListener} from '../../hooks/useListener';
 
-interface ScrollBarProps extends React.ComponentProps<any> {
+interface ScrollBarProps extends React.HtmlHTMLAttributes<HTMLDivElement> {
   viewHeight: number;
   scrollBarClass?: string;
 }
@@ -18,7 +18,7 @@ interface ScrollBarProps extends React.ComponentProps<any> {
 interface ScrollPosition {
   x: number;
   y: number;
-  scrollTop: number;
+  offset: number;
 }
 
 const ScrollBar: React.FunctionComponent<ScrollBarProps> = (props) => {
@@ -53,14 +53,14 @@ const ScrollBar: React.FunctionComponent<ScrollBarProps> = (props) => {
   }, [scrollRef]);
 
   // barHeight / viewHeight = scrollTop / scrollHeight = scrollPercent
-  const [scrollPercent, setScrollPercent] = useState(0);
+  const [barOffset, setBarOffset] = useState(0);
 
   // change scroll bar offset when dragging with mouse
   const isDraggingBar = useRef<boolean>(false);
   const primaryMousePosition = useRef<ScrollPosition>({
     x: 0,
     y: 0,
-    scrollTop: 0
+    offset: 0
   });
 
   const onBarMouseDown = useCallback((event: React.MouseEvent) => {
@@ -68,30 +68,30 @@ const ScrollBar: React.FunctionComponent<ScrollBarProps> = (props) => {
     primaryMousePosition.current = {
       x: event.clientX,
       y: event.clientY,
-      scrollTop: scrollRef.current.scrollTop
+      offset: barOffset
     };
   }, [isDraggingBar]);
 
   useEffect(() => {
+    console.log('listen mouse move');
     const mouseMoveListener = (event: MouseEvent) => {
       if (!isDraggingBar.current) return;
-      const scrollHeight = scrollRef.current.scrollHeight
-      const newOffset = event.clientY - primaryMousePosition.current.y
-        + scrollPercent * viewHeight;
-      const newScrollPercent = newOffset / viewHeight;
-      const maxScrollPercent = (scrollHeight - viewHeight) / scrollHeight;
-      setScrollPercent(Math.max(0, Math.min(maxScrollPercent, newScrollPercent)));
+      const delta = event.clientY - primaryMousePosition.current.y;
+      const newOffset = delta + primaryMousePosition.current.offset;
+      const maxBarOffset = viewHeight - barHeight;
+      console.log('offset', Math.max(0, Math.min(maxBarOffset, newOffset)));
+      setBarOffset(Math.max(0, Math.min(maxBarOffset, newOffset)));
     };
     document.addEventListener('mousemove', mouseMoveListener);
     return () => {
       document.removeEventListener('mousemove', mouseMoveListener);
     };
-  }, []);
+  }, [barHeight]);
 
   useEffect(() => {
     scrollRef.current.scrollTop =
-      scrollPercent * scrollRef.current.scrollHeight;
-  }, [scrollPercent]);
+      (barOffset / viewHeight) * scrollRef.current.scrollHeight;
+  }, [barOffset, viewHeight, scrollRef]);
 
   useEffect(() => {
     const mouseUpListener = () => {
@@ -104,13 +104,11 @@ const ScrollBar: React.FunctionComponent<ScrollBarProps> = (props) => {
   }, []);
 
   // calculate scroll bar style according to scroll percent
-  const scrollBarStyle = useMemo(() => {
-    const barOffset = scrollPercent * viewHeight;
-    return {
-      height: barHeight,
-      transform: `translateY(${barOffset}px)`
-    };
-  }, [scrollPercent, barHeight]);
+  // const scrollBarStyle = useMemo(() => {
+  //   return {
+  //
+  //   };
+  // }, [barOffset, barHeight]);
 
   // prevent unexpected selection when moving scroll bar with mouse.
   useListener('selectstart', barRef, (event: Event) => {
@@ -122,7 +120,7 @@ const ScrollBar: React.FunctionComponent<ScrollBarProps> = (props) => {
   const onScroll = useCallback(
     (event: React.UIEvent<HTMLDivElement>) => {
       const {scrollTop, scrollHeight} = event.currentTarget;
-      setScrollPercent(scrollTop / scrollHeight);
+      setBarOffset(scrollTop / scrollHeight * viewHeight);
     },
     [scrollRef]
   );
@@ -140,7 +138,10 @@ const ScrollBar: React.FunctionComponent<ScrollBarProps> = (props) => {
       </div>
 
       {/* scroll bar simulation */}
-      <div className="gui-scroll-bar-wrapper" style={scrollBarStyle}>
+      <div className="gui-scroll-bar-wrapper" style={{
+        height: barHeight,
+        transform: `translateY(${barOffset}px)`
+      }}>
         <div
           className={classes(scrollBarClass, shouldSimulateScrollBar ? '' : 'hidden')}
           ref={barRef}

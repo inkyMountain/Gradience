@@ -9,6 +9,9 @@
     overflow: auto;
     left: 0;
     top: 0;
+    &::-webkit-scrollbar {
+      display: none;
+    }
   }
 
   $scrollBarWidth: 6px;
@@ -19,7 +22,7 @@
     width: $scrollBarWidth;
     border-radius: $scrollBarWidth / 2;
     overflow: hidden;
-    transition: transform linear 50ms;
+    //transition: transform linear 50ms;
     &:hover {
       transition: transform ease 0.3s;
       transform: scaleX(2);
