@@ -73,13 +73,11 @@ const ScrollBar: React.FunctionComponent<ScrollBarProps> = (props) => {
   }, [isDraggingBar]);
 
   useEffect(() => {
-    console.log('listen mouse move');
     const mouseMoveListener = (event: MouseEvent) => {
       if (!isDraggingBar.current) return;
       const delta = event.clientY - primaryMousePosition.current.y;
       const newOffset = delta + primaryMousePosition.current.offset;
       const maxBarOffset = viewHeight - barHeight;
-      console.log('offset', Math.max(0, Math.min(maxBarOffset, newOffset)));
       setBarOffset(Math.max(0, Math.min(maxBarOffset, newOffset)));
     };
     document.addEventListener('mousemove', mouseMoveListener);
@@ -102,13 +100,6 @@ const ScrollBar: React.FunctionComponent<ScrollBarProps> = (props) => {
       document.removeEventListener('mouseup', mouseUpListener);
     };
   }, []);
-
-  // calculate scroll bar style according to scroll percent
-  // const scrollBarStyle = useMemo(() => {
-  //   return {
-  //
-  //   };
-  // }, [barOffset, barHeight]);
 
   // prevent unexpected selection when moving scroll bar with mouse.
   useListener('selectstart', barRef, (event: Event) => {
