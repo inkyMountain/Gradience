@@ -1,6 +1,5 @@
 .gui-scroll-bar-hider {
   position: relative;
-  border: 1px solid palevioletred;
   overflow: hidden;
 
   .gui-scroll-element {
@@ -9,32 +8,23 @@
     overflow: auto;
     left: 0;
     top: 0;
+
     &::-webkit-scrollbar {
       display: none;
     }
   }
 
   $scrollBarWidth: 6px;
-  .gui-scroll-bar-wrapper {
+
+  .gui-scroll-bar {
+    background-color: rgba(47, 177, 255, 0.2);
     position: absolute;
     top: 0;
     right: 0;
     width: $scrollBarWidth;
     border-radius: $scrollBarWidth / 2;
     overflow: hidden;
-    //transition: transform linear 50ms;
-    &:hover {
-      transition: transform ease 0.3s;
-      transform: scaleX(2);
-    }
-    .gui-scroll-bar {
-      width: 100%;
-      height: 100%;
-      background-color: rgba(47, 177, 255, 0.2);
-    }
-
   }
-
 
   .hidden {
     display: none;

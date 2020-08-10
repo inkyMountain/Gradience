@@ -1,6 +1,7 @@
 import React, {
+  TouchEventHandler,
   useCallback,
-  useEffect,
+  useEffect, useMemo,
   // useMemo,
   useRef,
   useState
@@ -30,9 +31,9 @@ const ScrollBar: React.FunctionComponent<ScrollBarProps> = (props) => {
 
   // show scroll bar only when needed
   const [
-    scrollElementStyle,
-    setScrollElementStyle
-  ] = useState({right: 0});
+    scrollElementRight,
+    setScrollElementRight
+  ] = useState(0);
   const [
     shouldSimulateScrollBar,
     setShouldSimulateScrollBar
@@ -42,7 +43,7 @@ const ScrollBar: React.FunctionComponent<ScrollBarProps> = (props) => {
       scrollRef.current.clientHeight !== scrollRef.current.scrollHeight;
     setShouldSimulateScrollBar(_shouldSimulateScrollBar);
     if (_shouldSimulateScrollBar) {
-      setScrollElementStyle({right: -measureScrollBarWidth()});
+      setScrollElementRight(-measureScrollBarWidth());
     }
   }, [scrollRef]);
 
@@ -70,7 +71,7 @@ const ScrollBar: React.FunctionComponent<ScrollBarProps> = (props) => {
       y: event.clientY,
       offset: barOffset
     };
-  }, [isDraggingBar]);
+  }, [isDraggingBar, barOffset]);
 
   useEffect(() => {
     const mouseMoveListener = (event: MouseEvent) => {
@@ -78,6 +79,8 @@ const ScrollBar: React.FunctionComponent<ScrollBarProps> = (props) => {
       const delta = event.clientY - primaryMousePosition.current.y;
       const newOffset = delta + primaryMousePosition.current.offset;
       const maxBarOffset = viewHeight - barHeight;
+      if (newOffset > maxBarOffset || newOffset <= 0) return;
+      // prevent the bar exceed the start and end.
       setBarOffset(Math.max(0, Math.min(maxBarOffset, newOffset)));
     };
     document.addEventListener('mousemove', mouseMoveListener);
@@ -116,6 +119,69 @@ const ScrollBar: React.FunctionComponent<ScrollBarProps> = (props) => {
     [scrollRef]
   );
 
+  // enable pull down refresh
+  const [pullLength, setPullLength] = useState(0);
+  const isPullingDown = useRef(false);
+  const lastTouch = useRef({x: 0, y: 0});
+  const primaryTouchOffset = useRef(0);
+
+  const scrollElementStyle = useMemo(() => {
+    return {
+      right: scrollElementRight,
+      transform: `translateY(${pullLength}px)`
+    };
+  }, [scrollElementRight, pullLength]);
+
+  const onTouchStart: TouchEventHandler = useCallback(
+    (event) => {
+      lastTouch.current.x = event.touches[0].clientX;
+      lastTouch.current.y = event.touches[0].clientY;
+      primaryTouchOffset.current = event.touches[0].clientY;
+    }, []);
+  const easeOutCubic = useCallback(
+    (x: number) => 1 - Math.pow(1 - x, 4),
+    []
+  );
+  useEffect(
+    () => {
+      const handler = (event: TouchEvent) => {
+        if (
+          scrollRef.current.scrollTop === 0 &&
+          event.touches[0].clientY > lastTouch.current.y
+        ) {
+          isPullingDown.current = true;
+        }
+        if (!isPullingDown.current) return;
+        // const delta = event.touches[0].clientY - lastTouch.current.y;
+        const moveDeltaOfPrimary = event.touches[0].clientY - primaryTouchOffset.current;
+        setPullLength(length => {
+          // const newLength = length + delta;
+          const MAX_PULLDOWN_LENGTH = 200;
+          const MAX_TRANSLATE_LENGTH = MAX_PULLDOWN_LENGTH / 2;
+          const easedLength = easeOutCubic(
+            Math.min(moveDeltaOfPrimary, MAX_PULLDOWN_LENGTH) / MAX_PULLDOWN_LENGTH
+          ) * MAX_TRANSLATE_LENGTH;
+          return Math.max(0, easedLength);
+        });
+        lastTouch.current.x = event.touches[0].clientX;
+        lastTouch.current.y = event.touches[0].clientY;
+        event.preventDefault();
+      };
+      // Use preventDefault and passive false together to prevent browser's native bounce effect like safari and wechat x5 browser.
+      scrollRef.current.addEventListener('touchmove', handler, {passive: false});
+      return () => {
+        scrollRef.current.removeEventListener('touchmove', handler);
+      };
+    }, []);
+  const onTouchEnd: TouchEventHandler = useCallback(() => {
+    isPullingDown.current = false;
+    setPullLength(0);
+  }, []);
+  const onTouchCancel: TouchEventHandler = useCallback(() => {
+    isPullingDown.current = false;
+    setPullLength(0);
+  }, []);
+
   return (
     <div className="gui-scroll-bar-hider" style={{height: viewHeight}}>
       {/* scroll container */}
@@ -123,22 +189,24 @@ const ScrollBar: React.FunctionComponent<ScrollBarProps> = (props) => {
            style={scrollElementStyle}
            ref={scrollRef}
            onScroll={onScroll}
+           onTouchStart={onTouchStart}
+           onTouchEnd={onTouchEnd}
+           onTouchCancel={onTouchCancel}
       >
         {/* the content that needs scroll */}
         {children}
       </div>
 
       {/* scroll bar simulation */}
-      <div className="gui-scroll-bar-wrapper" style={{
-        height: barHeight,
-        transform: `translateY(${barOffset}px)`
-      }}>
-        <div
-          className={classes(scrollBarClass, shouldSimulateScrollBar ? '' : 'hidden')}
-          ref={barRef}
-          onMouseDown={onBarMouseDown}
-        />
-      </div>
+      <div
+        className={classes(scrollBarClass, shouldSimulateScrollBar ? '' : 'hidden')}
+        ref={barRef}
+        style={{
+          height: barHeight,
+          transform: `translateY(${barOffset}px)`
+        }}
+        onMouseDown={onBarMouseDown}
+      />
     </div>
   );
 };
