@@ -8,6 +8,12 @@ module.exports = merge(
     entry: path.resolve(__dirname, '../../', 'src/lib/index.tsx'),
     mode: 'production',
 
+    output: {
+      filename: 'index.js',
+      path: path.resolve(__dirname, '../../', 'dist'),
+      libraryTarget: 'umd'
+    },
+
     // release构建时不打包react
     externals: {
       react: {

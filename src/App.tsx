@@ -7,10 +7,12 @@ import GuardedRoute from './pages/components/GuardedRoute/GuardedRoute';
 
 const navLinks = Object.keys(pages).reduce((previous, current) => {
   const directory = (
-    <NavLink className="directory"
-             to={`/${current}`}
-             key={current}
-             draggable={false}>
+    <NavLink
+      className="directory"
+      to={`/${current}`}
+      key={current}
+      draggable={false}
+    >
       {current}
     </NavLink>
   );
@@ -19,42 +21,37 @@ const navLinks = Object.keys(pages).reduce((previous, current) => {
 
 const routes = Object.entries(pages).reduce((previous, current) => {
   const [name, component] = current;
-  const route = <Route path={`/${name}`} component={component} key={name}/>;
+  const route = <Route path={`/${name}`} component={component} key={name} />;
   return [...previous, route];
 }, []);
 
 const App: React.FunctionComponent = () => {
+  const aside = (
+    <Aside className="directories">
+      <Layout>
+        <Header className="aside-header">
+          <h1 className="framework-name">Animal Crossing</h1>
+          <div className="introduction">React UI Framework</div>
+        </Header>
+        <Content>
+          <ul>{navLinks}</ul>
+        </Content>
+        <Footer className={'aside-footer'}>Developed By CYT</Footer>
+      </Layout>
+    </Aside>
+  );
+
   return (
     <Router>
       <GuardedRoute>
-        <Layout className='page-container'>
-          {
-            window.innerWidth >= 600 &&
-            <Aside className="directories">
-              <Layout>
-                <Header className='aside-header'>
-                  <h1 className="framework-name">Animal Crossing</h1>
-                  <div className="introduction">React UI Framework</div>
-                </Header>
-                <Content>
-                  <ul>{navLinks}</ul>
-                </Content>
-                <Footer className={'aside-footer'}>
-                  Developed By CYT
-                </Footer>
-              </Layout>
-            </Aside>
-          }
+        <Layout className="page-container">
+          {window.innerWidth >= 600 && aside}
 
-          <Content className='global-main'>
-            <Layout>
-              <Content>
-                <Switch>
-                  {routes}
-                  <Route path='/' component={pages.icon}/>
-                </Switch>
-              </Content>
-            </Layout>
+          <Content className="global-main">
+            <Switch>
+              {routes}
+              <Route path="/" component={pages.icon} />
+            </Switch>
           </Content>
         </Layout>
       </GuardedRoute>
