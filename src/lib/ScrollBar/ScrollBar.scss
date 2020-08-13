@@ -14,7 +14,7 @@
     }
   }
 
-  $scrollBarWidth: 6px;
+  $scrollBarWidth: 10px;
 
   .gui-scroll-bar {
     background-color: rgba(47, 177, 255, 0.2);
@@ -24,6 +24,12 @@
     width: $scrollBarWidth;
     border-radius: $scrollBarWidth / 2;
     overflow: hidden;
+  }
+
+  .indicator {
+    position: absolute;
+    top: 0;
+    left: 100px;
   }
 
   .hidden {

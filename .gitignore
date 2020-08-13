@@ -110,3 +110,5 @@ dist
 # IDE
 .vscode
 .idea
+
+/docs

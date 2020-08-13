@@ -1,4 +1,5 @@
 import ScrollBar from '../../lib/ScrollBar/ScrollBar';
+import './PageScrollBar.scss';
 import React from 'react';
 
 interface PageScrollBar extends React.ComponentProps<any> {}
