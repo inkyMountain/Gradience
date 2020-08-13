@@ -6,6 +6,7 @@ import React, {
   // useMemo,
   useRef,
   useState,
+  useLayoutEffect,
 } from 'react';
 import classes from '../../utils/classes';
 import './ScrollBar.scss';
@@ -66,14 +67,24 @@ const ScrollBar: React.FunctionComponent<ScrollBarProps> = (props) => {
       const delta = event.clientY - primaryClientY.current;
       const newOffset = delta + primaryOffset.current;
       const maxBarOffset = viewHeight - barHeight;
-      scrollRef.current.scrollTop =
-        (barOffset / viewHeight) * scrollRef.current.scrollHeight;
+      // scrollRef.current.scrollTop =
+      //   (barOffset / viewHeight) * scrollRef.current.scrollHeight;
       setBarOffset(Math.max(Math.min(newOffset, maxBarOffset), 0));
     };
     document.addEventListener('mousemove', mouseMoveListener);
     return () => {
       document.removeEventListener('mousemove', mouseMoveListener);
     };
+  }, [barOffset]);
+
+  useLayoutEffect(() => {
+    // scrollRef.current.scrollTop =
+    //   (barOffset / viewHeight) * scrollRef.current.scrollHeight;
+  }, [barOffset]);
+
+  useEffect(() => {
+    scrollRef.current.scrollTop =
+      (barOffset / viewHeight) * scrollRef.current.scrollHeight;
   }, [barOffset]);
 
   useEffect(() => {
