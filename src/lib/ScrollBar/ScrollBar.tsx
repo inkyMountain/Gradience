@@ -6,7 +6,6 @@ import React, {
   // useMemo,
   useRef,
   useState,
-  useLayoutEffect,
 } from 'react';
 import classes from '../../utils/classes';
 import './ScrollBar.scss';
@@ -22,8 +21,8 @@ const ScrollBar: React.FunctionComponent<ScrollBarProps> = (props) => {
   const {children, scrollBarClass, viewHeight} = props;
   const [barHeight, setBarHeight] = useState(0);
 
-  const scrollRef = useRef<HTMLDivElement>() as {current: HTMLDivElement};
-  const barRef = useRef<HTMLDivElement>() as {current: HTMLDivElement};
+  const scrollRef = useRef<HTMLDivElement>() as { current: HTMLDivElement };
+  const barRef = useRef<HTMLDivElement>() as { current: HTMLDivElement };
 
   // show scroll bar only when needed
   const [scrollElementRight, setScrollElementRight] = useState(0);
@@ -63,29 +62,20 @@ const ScrollBar: React.FunctionComponent<ScrollBarProps> = (props) => {
   useEffect(() => {
     const mouseMoveListener = (event: MouseEvent) => {
       if (!isDraggingBar.current) return;
-      // prevent the bar exceed the start and end.
       const delta = event.clientY - primaryClientY.current;
-      const newOffset = delta + primaryOffset.current;
-      const maxBarOffset = viewHeight - barHeight;
-      // scrollRef.current.scrollTop =
-      //   (barOffset / viewHeight) * scrollRef.current.scrollHeight;
-      setBarOffset(Math.max(Math.min(newOffset, maxBarOffset), 0));
+      const scrollHeight = scrollRef.current.scrollHeight;
+      const maxBarOffset = (1 - viewHeight / scrollHeight) * viewHeight;
+      // max & min 用来防止滚动条超出上下限
+      const newOffset = Math.max(Math.min(delta + primaryOffset.current, maxBarOffset), 0);
+      scrollRef.current.scrollTop =
+        (newOffset / viewHeight) * scrollRef.current.scrollHeight;
+      setBarOffset(newOffset);
     };
     document.addEventListener('mousemove', mouseMoveListener);
     return () => {
       document.removeEventListener('mousemove', mouseMoveListener);
     };
-  }, [barOffset]);
-
-  useLayoutEffect(() => {
-    // scrollRef.current.scrollTop =
-    //   (barOffset / viewHeight) * scrollRef.current.scrollHeight;
-  }, [barOffset]);
-
-  useEffect(() => {
-    scrollRef.current.scrollTop =
-      (barOffset / viewHeight) * scrollRef.current.scrollHeight;
-  }, [barOffset]);
+  }, []);
 
   useEffect(() => {
     const mouseUpListener = () => {
@@ -104,6 +94,13 @@ const ScrollBar: React.FunctionComponent<ScrollBarProps> = (props) => {
     // prevent user selection when move scroll bar
     const shouldPreventDefault = event.currentTarget === barRef.current;
     shouldPreventDefault && event.preventDefault();
+  });
+
+  // 修复 FireFox 在拖动滚动条时，意外选中其他文字的 bug。
+  useListener('selectstart', scrollRef, (event: any) => {
+    if (event && event.explicitOriginalTarget === barRef.current) {
+      event.preventDefault();
+    }
   });
 
   // making scroll bar reacting to scroll event.
@@ -150,7 +147,7 @@ const ScrollBar: React.FunctionComponent<ScrollBarProps> = (props) => {
       const easedLength =
         easeOutCubic(
           Math.min(moveDeltaOfPrimary, MAX_PULLDOWN_LENGTH) /
-            MAX_PULLDOWN_LENGTH
+          MAX_PULLDOWN_LENGTH
         ) * MAX_TRANSLATE_LENGTH;
       setPullLength(Math.max(0, easedLength));
       lastTouch.current.x = event.touches[0].clientX;
@@ -203,7 +200,7 @@ const ScrollBar: React.FunctionComponent<ScrollBarProps> = (props) => {
         }}
         onMouseDown={onBarMouseDown}
       />
-      <div className="indicator"></div>
+      <div className="indicator"/>
     </div>
   );
 };
