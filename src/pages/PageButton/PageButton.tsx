@@ -1,5 +1,6 @@
 import React from 'react';
 import Button from '../../lib/Button/Button';
+import '../../lib/Button/Button.scss';
 import './PageButton.scss';
 import {ColorType} from '../../utils/colorUtils';
 
@@ -20,7 +21,7 @@ const buttons = ['red', 'orange', 'yellow', 'green', 'blue', 'khaki'].map(
 const PageButton: React.FunctionComponent<React.PropsWithChildren<PageButtonProps>> = props => {
   return (
     <div className='page-button'>
-      {...buttons}
+      {buttons}
       <Button ghost={true} onClick={() => {console.log('ghost');}}>Ghost</Button>
     </div>
   );

@@ -7,7 +7,7 @@
     "start": "cross-env NODE_ENV=development webpack-dev-server --config ./build/config/webpack.config.dev.js",
     "dev": "cross-env NODE_ENV=development webpack-dev-server --config ./build/config/webpack.config.dev.js",
     "build": "cross-env NODE_ENV=release node ./build/scripts/build.js",
-    "release": "babel --copy-files",
+    "release": "rm -rf dist && babel src/lib --out-dir dist --extensions=\".tsx\" --copy-files",
     "docs": "cross-env NODE_ENV=release webpack --config ./build/config/webpack.config.docs.js",
     "ci": "cross-env NODE_ENV=test jest --config=jest.config.ci.js"
   },
@@ -36,7 +36,9 @@
   "dependencies": {},
   "devDependencies": {
     "@babel/cli": "^7.10.5",
-    "@babel/preset-env": "^7.7.7",
+    "@babel/plugin-syntax-jsx": "^7.10.4",
+    "@babel/plugin-transform-react-jsx": "^7.10.4",
+    "@babel/preset-env": "^7.11.0",
     "@babel/preset-react": "^7.7.4",
     "@babel/preset-typescript": "^7.10.4",
     "@loadable/component": "^5.11.0",
@@ -48,6 +50,8 @@
     "@types/react-test-renderer": "^16.9.1",
     "awesome-typescript-loader": "^5.2.1",
     "babel-jest": "^24.9.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
     "chalk": "^4.1.0",
     "clean-webpack-plugin": "^3.0.0",
     "cross-env": "^6.0.3",
