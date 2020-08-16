@@ -13,7 +13,12 @@ module.exports = {
     rules: [
       {
         test: /\.tsx?$/,
-        loader: 'awesome-typescript-loader',
+        loader: {
+          options: {
+            silent: true
+          },
+          loader: 'awesome-typescript-loader'
+        },
       },
       {
         test: /\.svg$/,
@@ -41,7 +46,7 @@ module.exports = {
   },
 
   output: {
-    filename: 'index.[contenthash].js',
+    filename: 'index.js',
     path: path.resolve(__dirname, '../../', 'dist'),
     // umd is both compatible for nodejs and browser
     libraryTarget: 'umd'
@@ -51,11 +56,9 @@ module.exports = {
     port: 7000
   },
 
+  stats: 'errors-only',
+
   plugins: [
-    //  auto inject .js file to template.html
-    new HtmlWebpackPlugin({
-      template: path.resolve(__dirname, '../../', 'template.html'),
-    }),
     new CleanWebpackPlugin()
   ],
 };

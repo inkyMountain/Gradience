@@ -6,7 +6,8 @@ module.exports = merge(
   base,
   {
     entry: path.resolve(__dirname, '../../', 'src/lib/index.tsx'),
-    mode: 'production',
+    // mode: 'production',
+    mode: 'development',
 
     output: {
       filename: 'index.js',
@@ -14,7 +15,7 @@ module.exports = merge(
       libraryTarget: 'umd'
     },
 
-    // release构建时不打包react
+    // release 构建时不打包 react
     externals: {
       react: {
         commonjs: 'react',
