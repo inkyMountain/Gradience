@@ -1,5 +1,5 @@
 {
-  "name": "animal-crossing",
+  "name": "animal-crossing-ui",
   "version": "0.0.6",
   "description": "React UI Library",
   "scripts": {
@@ -17,7 +17,7 @@
     "LICENSE",
     "package.json"
   ],
-  "types": "dist/src/index",
+  "types": "dist/src/lib/index.d.ts",
   "main": "dist/src/index.js",
   "repository": {
     "type": "git",
