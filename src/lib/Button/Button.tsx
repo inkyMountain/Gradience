@@ -1,5 +1,4 @@
 import React from 'react';
-import './Button.scss';
 import classes from '../../utils/classes';
 import {getRandomColor, ColorType} from '../../utils/colorUtils';
 
