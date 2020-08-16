@@ -1,6 +1,6 @@
 {
   "name": "animal-crossing",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "React UI Library",
   "scripts": {
     "test": "cross-env NODE_ENV=test jest --config=jest.config.js",
