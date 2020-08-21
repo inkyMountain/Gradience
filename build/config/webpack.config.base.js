@@ -1,6 +1,8 @@
 const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 const {CleanWebpackPlugin} = require('clean-webpack-plugin');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+
+const shouldUseBundleAnalyzer = process.argv.indexOf('--analyze') !== -1;
 
 module.exports = {
   entry: path.resolve(__dirname, '../../', 'src/index.tsx'),
@@ -56,9 +58,10 @@ module.exports = {
     port: 7000
   },
 
-  stats: 'errors-only',
+  // stats: 'errors-only',
 
   plugins: [
-    new CleanWebpackPlugin()
-  ],
+    new CleanWebpackPlugin(),
+    shouldUseBundleAnalyzer && new BundleAnalyzerPlugin()
+  ].filter(Boolean),
 };

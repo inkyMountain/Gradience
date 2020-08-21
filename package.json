@@ -3,12 +3,11 @@
   "version": "0.0.8",
   "description": "React UI Library",
   "scripts": {
-    "test": "cross-env NODE_ENV=test jest --config=jest.config.js",
     "start": "cross-env NODE_ENV=development webpack-dev-server --config ./build/config/webpack.config.dev.js",
-    "dev": "cross-env NODE_ENV=development webpack-dev-server --config ./build/config/webpack.config.dev.js",
-    "build": "cross-env NODE_ENV=release node ./build/scripts/build.js",
-    "release": "rm -rf dist && babel src/lib --out-dir dist --extensions=\".tsx\" --copy-files",
-    "docs": "cross-env NODE_ENV=release webpack --config ./build/config/webpack.config.docs.js",
+    "dev": "npm start",
+    "test": "cross-env NODE_ENV=test jest --config=jest.config.js",
+    "build:lib": "rm -rf dist && babel src/lib --out-dir dist/lib --extensions=\".tsx\" --copy-files && tsc --build tsconfig.lib.json",
+    "build:docs": "cross-env NODE_ENV=release webpack --config ./build/config/webpack.config.docs.js",
     "ci": "cross-env NODE_ENV=test jest --config=jest.config.ci.js"
   },
   "files": [
@@ -77,6 +76,7 @@
     "typescript": "^3.9.7",
     "url-loader": "^3.0.0",
     "webpack": "^4.41.3",
+    "webpack-bundle-analyzer": "^3.8.0",
     "webpack-cli": "^3.3.10",
     "webpack-dev-server": "^3.10.0",
     "webpack-merge": "^4.2.2"

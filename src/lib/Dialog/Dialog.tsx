@@ -1,7 +1,7 @@
 import React, {Fragment, ReactElement, ReactFragment, ReactNode} from 'react';
 import ReactDOM from 'react-dom';
-import '../../static/icons/index.js';
-import classes from '../../utils/classes';
+import '../static/icons/index.js';
+import classes from '../utils/classes';
 import Button from '../Button/Button';
 import './Dialog.scss';
 

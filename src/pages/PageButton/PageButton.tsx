@@ -1,8 +1,10 @@
-import React from 'react';
-import Button from '../../lib/Button/Button';
-import '../../lib/Button/Button.scss';
+import * as React from 'react';
+// import Button from '../../lib/Button/Button';
+// import '../../lib/Button/Button.scss';
+import {Button} from '../../../dist/lib';
+import '../../../dist/lib/Button/Button.scss';
 import './PageButton.scss';
-import {ColorType} from '../../utils/colorUtils';
+import {ColorType} from '../../lib/utils/colorUtils';
 
 export interface PageButtonProps {
 }
@@ -10,6 +12,7 @@ export interface PageButtonProps {
 const onButtonClick = (output: string) => {
   return () => console.log(output);
 };
+
 const buttons = ['red', 'orange', 'yellow', 'green', 'blue', 'khaki'].map(
   (color: ColorType, index) => (
     <Button onClick={onButtonClick(color)} colortype={color} key={index}>

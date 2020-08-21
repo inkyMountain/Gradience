@@ -1,5 +1,5 @@
 import React from 'react';
-import classes from '../../utils/classes';
+import classes from '../utils/classes';
 
 interface FooterProps extends React.HTMLAttributes<any> {
 

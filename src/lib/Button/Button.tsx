@@ -1,6 +1,6 @@
-import React from 'react';
-import classes from '../../utils/classes';
-import {getRandomColor, ColorType} from '../../utils/colorUtils';
+import * as React from 'react';
+import classes from '../utils/classes';
+import {getRandomColor, ColorType} from '../utils/colorUtils';
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   colortype?: ColorType

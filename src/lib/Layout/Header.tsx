@@ -1,5 +1,5 @@
 import React from 'react';
-import classes from '../../utils/classes';
+import classes from '../utils/classes';
 
 interface HeaderProps extends React.HTMLAttributes<any> {
 

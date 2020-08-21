@@ -7,10 +7,9 @@ import React, {
   useRef,
   useState,
 } from 'react';
-import classes from '../../utils/classes';
+import classes from '../utils/classes';
 import './ScrollBar.scss';
-import measureScrollBarWidth from '../../utils/measureScrollBarWidth';
-import {useListener} from '../../hooks/useListener';
+import measureScrollBarWidth from '../utils/measureScrollBarWidth';
 
 interface ScrollBarProps extends React.HtmlHTMLAttributes<HTMLDivElement> {
   viewHeight: number;
@@ -148,12 +147,13 @@ const ScrollBar: React.FunctionComponent<ScrollBarProps> = (props) => {
         easeOutCubic(
           Math.min(moveDeltaOfPrimary, MAX_PULLDOWN_LENGTH) /
           MAX_PULLDOWN_LENGTH
-        ) * MAX_TRANSLATE_LENGTH;
+        ) * MAX_TRANSLATE_LENGTH * 0.8;
       setPullLength(Math.max(0, easedLength));
       lastTouch.current.x = event.touches[0].clientX;
       lastTouch.current.y = event.touches[0].clientY;
       event.preventDefault();
     };
+
     // to prevent browser's native bounce effect like safari and wechat x5 browser.
     scrollRef.current.addEventListener('touchmove', touchMoveHandler, {
       passive: false,
@@ -208,6 +208,20 @@ const ScrollBar: React.FunctionComponent<ScrollBarProps> = (props) => {
 ScrollBar.defaultProps = {
   viewHeight: 500,
   scrollBarClass: 'gui-scroll-bar',
+};
+
+const useListener = (
+  eventName: string,
+  ref: React.MutableRefObject<HTMLElement>,
+  listener: (event: Event) => void
+) => {
+  useEffect(() => {
+    if (!ref.current) return;
+    ref.current.addEventListener(eventName, listener);
+    return () => {
+      ref.current.removeEventListener(eventName, listener);
+    };
+  }, [ref]);
 };
 
 export default ScrollBar;
