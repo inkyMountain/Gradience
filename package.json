@@ -5,10 +5,10 @@
   "scripts": {
     "start": "cross-env NODE_ENV=development webpack-dev-server --config ./build/config/webpack.config.dev.js",
     "dev": "npm start",
-    "publish": "npm run build:lib && npm publish",
     "test": "cross-env NODE_ENV=test jest --config=jest.config.js",
     "build:lib": "rm -rf dist && babel src/lib --out-dir dist/lib --extensions=\".tsx\" --copy-files && tsc --build tsconfig.lib.json",
     "build:docs": "cross-env NODE_ENV=release webpack --config ./build/config/webpack.config.docs.js",
+    "analyze": "cross-env NODE_ENV=release webpack --config ./build/config/webpack.config.docs.js --analyze",
     "ci": "cross-env NODE_ENV=test jest --config=jest.config.ci.js"
   },
   "files": [
@@ -17,6 +17,7 @@
     "LICENSE",
     "package.json"
   ],
+  "sideEffects": false,
   "types": "dist/src/lib/index.d.ts",
   "main": "dist/index.js",
   "repository": {
