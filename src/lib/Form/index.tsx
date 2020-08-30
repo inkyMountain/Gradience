@@ -1,7 +1,7 @@
 import React, {ChangeEvent, CSSProperties, FormEvent, ReactElement} from 'react';
-import Input from '../Input/Input';
-import './Form.scss';
-import Button from '../Button/Button';
+import Input from '../input';
+import './index.scss';
+import Button from '../button';
 
 interface FormProps {
   fields: Field[],

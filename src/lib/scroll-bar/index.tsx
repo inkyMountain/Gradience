@@ -8,7 +8,7 @@ import React, {
   useState,
 } from 'react';
 import classes from '../utils/classes';
-import './ScrollBar.scss';
+import './index.scss';
 import measureScrollBarWidth from '../utils/measureScrollBarWidth';
 
 interface ScrollBarProps extends React.HtmlHTMLAttributes<HTMLDivElement> {

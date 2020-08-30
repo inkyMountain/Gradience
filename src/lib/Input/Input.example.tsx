@@ -1,10 +1,10 @@
 import React from 'react';
-import Input from './Input';
+import Input from './index';
 
-const InputExample: React.FC = props => {
+const InputExample: React.FC = (props) => {
   return (
     <div className="input-example">
-      <Input/>
+      <Input />
     </div>
   );
 };

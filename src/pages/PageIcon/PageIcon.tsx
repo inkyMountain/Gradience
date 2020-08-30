@@ -1,6 +1,5 @@
 import React from 'react';
-// import Icon from '../../lib/Icon/Icon';
-import Icon from '../../../dist/lib/Icon/Icon';
+import Icon from '../../../dist/lib/icon';
 import './PageIcon.scss';
 import CodeFragment from '../components/CodeFragment/CodeFragment';
 

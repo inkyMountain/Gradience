@@ -1,11 +1,11 @@
 import React from 'react';
 import classes from '../utils/classes';
 
-interface MainProps extends React.HTMLAttributes<any> {
+export interface ContentProps extends React.HTMLAttributes<any> {
 
 }
 
-const Layout: React.FC<MainProps> = props => {
+const Content: React.FC<ContentProps> = props => {
   const {children, className, ...restProps} = props;
   return (
     <div className={classes('gui-layout-content', className)} {...restProps}>
@@ -14,4 +14,4 @@ const Layout: React.FC<MainProps> = props => {
   );
 };
 
-export default Layout;
+export default Content;

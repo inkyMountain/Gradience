@@ -1,4 +1,4 @@
-import ScrollBar from '../../lib/ScrollBar/ScrollBar';
+import ScrollBar from '../../lib/scroll-bar';
 import './PageScrollBar.scss';
 import React from 'react';
 

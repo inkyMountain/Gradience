@@ -1,4 +1,4 @@
-import {Field} from './Form';
+import {Field} from './index';
 
 interface Rules {
   [name: string]: {

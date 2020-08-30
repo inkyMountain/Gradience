@@ -1,6 +1,6 @@
 import React, {FormEvent, Fragment, useState} from 'react';
-import Form from './Form';
-import {Field, OnInputChange} from './Form';
+import Form from './index';
+import {Field, OnInputChange} from './index';
 import validator from './validator';
 
 function checkUnique(value: string) {
@@ -13,11 +13,11 @@ function checkUnique(value: string) {
   });
 }
 
-const FormExample: React.FC = props => {
+const FormExample: React.FC = (props) => {
   const [fields, setFields] = useState<Array<Field>>([
     {label: '早饭', value: '油条豆浆', name: 'breakfast'},
     {label: '中饭', value: '盖浇饭', name: 'meal'},
-    {label: '晚饭', value: '牛排', name: 'dinner'}
+    {label: '晚饭', value: '牛排', name: 'dinner'},
   ]);
   const onInputChange: OnInputChange = ({index, newContent}) => {
     console.log(index, newContent);
@@ -25,29 +25,35 @@ const FormExample: React.FC = props => {
     setFields([...fields]);
   };
   const onSubmit = (event: FormEvent) => {
-    validator({
-      breakfast: {required: true},
-      meal: {required: true, validate: value => false},
-      dinner: {
-        required: false,
-        validate: (value) => {
-          return checkUnique(value);
+    validator(
+      {
+        breakfast: {required: true},
+        meal: {required: true, validate: (value) => false},
+        dinner: {
+          required: false,
+          validate: (value) => {
+            return checkUnique(value);
+          },
+          suggestion: '晚饭一定要吃的哦晚饭一定要吃的哦晚饭一定要吃的哦',
         },
-        suggestion: '晚饭一定要吃的哦晚饭一定要吃的哦晚饭一定要吃的哦'
       },
-    }, fields, (errors) => {
-      console.log('errors', errors);
-      setErrors(errors);
-    });
+      fields,
+      (errors) => {
+        console.log('errors', errors);
+        setErrors(errors);
+      }
+    );
   };
-  const [errors, setErrors] = useState<{ [Key: string]: boolean }>({});
+  const [errors, setErrors] = useState<{[Key: string]: boolean}>({});
 
   return (
     <Fragment>
       <div className="form-example">
-        <Form fields={fields} onChange={onInputChange}
-              onSubmit={onSubmit}
-              errors={errors}
+        <Form
+          fields={fields}
+          onChange={onInputChange}
+          onSubmit={onSubmit}
+          errors={errors}
         />
       </div>
     </Fragment>
@@ -55,7 +61,3 @@ const FormExample: React.FC = props => {
 };
 
 export default FormExample;
-
-
-
-

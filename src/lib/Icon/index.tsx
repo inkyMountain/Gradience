@@ -1,6 +1,6 @@
 import React from 'react';
 import '../static/icons/index.js';
-import './Icon.scss';
+import './index.scss';
 import classes from '../utils/classes';
 
 interface IconProps extends React.HTMLAttributes<SVGElement> {

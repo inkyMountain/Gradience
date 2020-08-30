@@ -2,10 +2,10 @@ import React from 'react';
 import {HashRouter as Router, Switch, Route, NavLink} from 'react-router-dom';
 import './App.scss';
 import pages from './pages/index';
-import {Layout, Content, Aside, Header, Footer} from './lib/Layout/Layout';
+import Layout from './lib/layout';
 import GuardedRoute from './pages/components/GuardedRoute/GuardedRoute';
 // import {Button, Icon} from '../dist/lib';
-
+const {Content, Aside, Header, Footer} = Layout;
 const navLinks = Object.keys(pages).reduce((previous, current) => {
   const directory = (
     <NavLink
@@ -22,7 +22,7 @@ const navLinks = Object.keys(pages).reduce((previous, current) => {
 
 const routes = Object.entries(pages).reduce((previous, current) => {
   const [name, component] = current;
-  const route = <Route path={`/${name}`} component={component} key={name}/>;
+  const route = <Route path={`/${name}`} component={component} key={name} />;
   return [...previous, route];
 }, []);
 
@@ -53,7 +53,7 @@ const App: React.FunctionComponent = () => {
           <Content className="global-main">
             <Switch>
               {routes}
-              <Route path="/" component={pages.icon}/>
+              <Route path="/" component={pages.icon} />
             </Switch>
           </Content>
         </Layout>

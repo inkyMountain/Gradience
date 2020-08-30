@@ -1,11 +1,11 @@
 import React from 'react';
 import classes from '../utils/classes';
 
-interface AsideProps extends React.HTMLAttributes<any> {
+export interface AsideProps extends React.HTMLAttributes<any> {
 
 }
 
-const Layout: React.FC<AsideProps> = props => {
+const Aside: React.FC<AsideProps> = props => {
   const {children, className, ...restProps} = props;
   return (
     <div className={classes('gui-layout-aside', className)} {...restProps}>
@@ -14,4 +14,4 @@ const Layout: React.FC<AsideProps> = props => {
   );
 };
 
-export default Layout;
+export default Aside;

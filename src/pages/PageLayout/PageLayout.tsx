@@ -1,16 +1,21 @@
 import './PageLayout.scss';
 import React from 'react';
-import Layout from '../../lib/Layout/Layout';
-import Aside from '../../lib/Layout/Aside';
-import Footer from '../../lib/Layout/Footer';
-import Content from '../../lib/Layout/Content';
-import Header from '../../lib/Layout/Header';
+import Layout from '../../lib/layout';
+// import Aside from '../../lib/Layout/Aside';
+// import Footer from '../../lib/Layout/Footer';
+// import Content from '../../lib/Layout/Content';
+// import Header from '../../lib/Layout/Header';
 
-export interface PageLayoutProps extends React.PropsWithChildren<any> {
+const {
+  Aside,
+  Header,
+  Footer,
+  Content
+} = Layout
 
-}
+export interface PageLayoutProps extends React.PropsWithChildren<any> {}
 
-const PageLayout: React.FC<PageLayoutProps> = props => {
+const PageLayout: React.FC<PageLayoutProps> = (props) => {
   return (
     <div className="page-layout">
       <div className="example">
